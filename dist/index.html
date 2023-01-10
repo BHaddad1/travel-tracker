@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Webpack Starter Kit</title>
+    <title>Catravel</title>
   </head>
   <body>
     <section class="login-page">
@@ -19,49 +19,50 @@
           <label class="password" for="password">Password</label>
           <input type="text" class="login-input" id="password" required placeholder="Password"/>
         </section>
-        <h2 class="username-error hidden">Incorrect username & password combination</h2>
-        <button class="login-button" type="submit">Login</button>
+        <p class="username-error hidden">Incorrect username & password combination</p>
+        <button class="login-button" type="button">Login</button>
       </form>
     </section>
     <section class="traveler-view hidden">
       <nav class="search-container">
-        <img class="logo" alt="Cat on a plane" src=""/>
+        <img class="logo" alt="Cat icon with a plane through its face" src="../src/images/catTravel2.jpg"/>
         <form>
           <select class="destination" type="text" name="destinations" id="destinations" required>
             <option class="destinations" name="destinations">Destinations</option>
           </select>
           <label for="travelers" class="travelers">Number of Travelers</label>
-          <input id="travelers" class="destination" type="text" placeholder="No. of Travelers" required minlength="1" min="1"/>
+          <input id="travelers" class="destination" type="number" placeholder="No. of Travelers" required minlength="1" min="1"/>
           <label class="first-day">Leaving on:</label>
           <input class="destination" type="text" placeholder="Date" required minlength="1" min="1"/>
-          <button type="submit" name="button" class="trip-cost-button" id="">Get Total Cost</button>
+          <button type="button" name="button" class="trip-cost-button" id="">Get Total Cost</button>
           <p class="hidden" id="total-cost"></p>
           <button type="button" name="button" class="request-trip-button" id="">Request Trip</button>
-          <p type="button" name="button" class="hidden" id="trip-requested">Your trip has been requested and is pending. You'll hear back from an agent shortly!</p>
+          <p type="button" name="button" class="hidden" id="trip-requested-message">Your trip has been requested and is pending. You'll hear back from an agent shortly!</p>
         </form>
         <section class="logout">
-          <button type="submit">Log Out</button>
+          <button class="logout-button" type="button">Log Out</button>
         </section>
       </nav>
-      <section class="main-container">
-        <div class="all-trips-container">
-          <div class="single-trip-container">
-            <section class="trip-card-template">
-              <img alt="" src="" />
-              <p class="trip trip-name">Destination Name</p>
-              <p class="trip date"></p>
-              <p class="trip number-of-travelers"></p>
-              <p class="trip total-cost"></p>
-              <p class="trip duration"></p>
-              <p class="trip status"></p>
-            </section>
-          </div>
-        </div>
-        <div class="total-section">
-          <h2 class="total">Total Spent on Trips This Year</h2>
+      <main class="main-container">
+        <section class="all-trips-container">
+          <button type="button" name="button" class="button" id="all-trips">All Trips</button>
+          <button type="button" name="button" class="button" id="approved-trips">Approved Trips</button>
+          <button type="button" name="button" class="button" id="pending-trips">Pending Trips</button>
+          <section class="single-trip-template">
+            <img alt="" src="" />
+            <p class="trip trip-name">Destination Name</p>
+            <p class="trip date"></p>
+            <p class="trip number-of-travelers"></p>
+            <p class="trip total-cost"></p>
+            <p class="trip duration"></p>
+            <p class="trip status"></p>
+          </section>
+        </section>
+        <section class="total-section">
+          <h3 class="total">Total Spent on Trips This Year</h3>
           <p class="total"></p>
-        </div>
-      </section>
+        </section>
+      </main>
     </section>
     <script src="bundle.js"></script>
   </body>
