@@ -10,7 +10,7 @@
     <title>Catravel</title>
   </head>
   <body>
-    <section class="login-page">
+    <section class="login-page hidden">
       <section class="login-container">
         <form class="login">
           <img src="../src/images/catTravel2.jpg" class="logo" alt="Cat icon with a plane through the head">
@@ -28,10 +28,10 @@
         </form>
       </section>
     </section>
-    <section class="traveler-view hidden">
+    <section class="traveler-view">
       <nav class="search-container">
         <img src="../src/images/catTravel2.jpg" class="logo" alt="Cat icon with a plane through the head">
-        <form>
+        <form class="trip-search-form">
           <select class="destination" type="text" name="destinations" id="destinations" required>
             <option class="destinations" name="destinations">Destinations</option>
           </select>
@@ -40,9 +40,9 @@
           <label class="first-day">Leaving on:</label>
           <input class="destination" type="text" placeholder="Date" required minlength="1" min="1"/>
           <button type="button" name="button" class="trip-cost-button" id="">Get Total Cost</button>
-          <p class="hidden" id="total-cost"></p>
+          <p class="" id="total-cost">Total for Requested Trip</p>
           <button type="button" name="button" class="request-trip-button" id="">Request Trip</button>
-          <p type="button" name="button" class="hidden" id="trip-requested-message">Your trip has been requested and is pending. You'll hear back from an agent shortly!</p>
+          <p type="button" name="button" class="" id="trip-requested-message">Your trip has been requested and is pending. You'll hear back from an agent shortly!</p>
         </form>
         <section class="logout">
           <button class="logout-button" type="button">Log Out</button>
@@ -56,11 +56,11 @@
           <section class="trip-card-template">
             <img alt="" src="" />
             <p class="trip trip-name">Destination Name</p>
-            <p class="trip date"></p>
-            <p class="trip number-of-travelers"></p>
-            <p class="trip total-cost"></p>
-            <p class="trip duration"></p>
-            <p class="trip status"></p>
+            <p class="trip date">trip date</p>
+            <p class="trip number-of-travelers">no of traveler</p>
+            <p class="trip total-cost">total cose</p>
+            <p class="trip duration">duration</p>
+            <p class="trip status">status</p>
           </section>
         </section>
         <section class="total-section">

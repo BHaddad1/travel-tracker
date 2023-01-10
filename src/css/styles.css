@@ -15,12 +15,53 @@ body {
 .login-button {
   background-color: #ff385c;
   border: none;
-  border-radius: 9%;
+  border-radius: 5%;
   height: 4vh;
   width: 7vw;
 }
 
 .login-input {
-  border-radius: 9%;
   height: 5vh;
+}
+
+.username-section,
+.password-section {
+  margin-top: 5%;
+}
+
+.username-error {
+  color: red;
+  font-size: 1.2em;
+}
+
+.hidden {
+  display: none;
+}
+
+.traveler-view {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.search-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  height: 25vh;
+  justify-content: center;
+  width: 61vw;
+}
+
+.logo {
+  height: 10vh;
+  width: 10vw;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  width: 61vw;
 }
