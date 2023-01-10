@@ -4,101 +4,75 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Webpack Starter Kit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <title>Catravel</title>
   </head>
   <body>
-    <section class="login-page">
-      <img alt="" src="" />
-      <h1 class="login-title">Login</h1>
-      <form class="login">
-        <section class="username-section">
-          <label class="username" for="username">Username</label>
-          <input
-            type="text"
-            class="login-input"
-            autofocus
-            required
-            placeholder="Username"
-          />
-        </section>
-        <section class="password-section">
-          <label class="password" for="password">Password</label>
-          <input
-            type="text"
-            class="login-input"
-            required
-            placeholder="Password"
-          />
-        </section>
-        <h2 class="username-error hidden">
-          Incorrect username & password combination
-        </h2>
-        <button class="login-button" type="submit">Login</button>
-      </form>
+    <section class="login-page hidden">
+      <section class="login-container">
+        <form class="login">
+          <img src="./images/catTravel2.jpg" class="logo" alt="Cat icon with a plane through the head">
+          <h1 class="login-title">Login</h1>
+          <section class="username-section">
+            <label class="username" for="username">Username</label>
+            <input type="text" class="login-input" id="username" autofocus required placeholder="Username"/>
+          </section>
+          <section class="password-section">
+            <label class="password" for="password">Password</label>
+            <input type="text" class="login-input" id="password" required placeholder="Password"/>
+          </section>
+          <p class="username-error hidden">Incorrect username & password combination</p>
+          <button class="login-button button" type="button">Login</button>
+        </form>
+      </section>
     </section>
-    <section class="traveler-view hidden">
+    <section class="traveler-view">
       <nav class="search-container">
-        <img class="logo" alt="Cat on a plane" src="" />
-        <form>
-          <select
-            class="destination"
-            type="text"
-            name="destinations"
-            id="destinations"
-            required
-          >
-            <option class="destinations" name="destinations">
-              Destinations
-            </option>
+        <section class="logo-container">
+          <img src="./images/catTravel2.jpg" class="logo" alt="Cat icon with a plane through the head">
+        </section>
+        <form class="trip-search-form">
+          <select class="destination" type="text" name="destinations" id="destinations" required>
+            <option class="destinations" name="destinations">Destinations</option>
           </select>
           <label for="travelers" class="travelers">Number of Travelers</label>
-          <input
-            id="travelers"
-            class="destination"
-            type="text"
-            placeholder="No. of Travelers"
-            required
-            minlength="1"
-            min="1"
-          />
+          <input id="travelers" class="destination" type="number" placeholder="No. of Travelers" required minlength="1" min="1"/>
           <label class="first-day">Leaving on:</label>
-          <input
-            class="destination"
-            type="text"
-            placeholder="Date"
-            required
-            minlength="1"
-            min="1"
-          />
-          <button type="button" name="button" class="trip-cost-button" id="">
-            Get Total Cost
-          </button>
-          <p class="hidden" id="total-cost"></p>
-          <button type="button" name="button" class="request-trip-button" id="">
-            Request Trip
-          </button>
-          <p type="button" name="button" class="hidden" id="trip-requested">
-            Your trip has been requested and is pending. You'll hear back from
-            an agent shortly!
-          </p>
+          <input class="date-input" id="dateInput" type="date" value="yyyy-MM-dd" placeholder="date" required/>
+          <p class="" id="total-cost">Total for Requested Trip</p>
+          <p type="button" name="button" class="" id="trip-requested-message">Your trip has been requested and is pending. You'll hear back from an agent shortly!</p>
         </form>
+        <section class="search-button-container">
+          <button type="button" name="button" class="trip-cost-button button" id="">Get Total Cost</button>
+          <button type="button" name="button" class="request-trip-button button" id="">Request Trip</button>
+        </section>
+        <section class="logout">
+          <button class="logout-button button" type="button">Log Out</button>
+        </section>
       </nav>
       <main class="main-container">
-        <div class="all-trips-container">
-          <section class="trip-template">
+        <section class="button-container">
+          <button type="button" name="button" class="trips-button button" id="all-trips">All Trips</button>
+          <button type="button" name="button" class="trips-button button" id="approved-trips">Approved Trips</button>
+          <button type="button" name="button" class="trips-button button" id="pending-trips">Pending Trips</button>
+        </section>
+        <section class="all-trips-container">
+          <section class="trip-card-template">
             <img alt="" src="" />
             <p class="trip trip-name">Destination Name</p>
-            <p class="trip date"></p>
-            <p class="trip number-of-travelers"></p>
-            <p class="trip total-cost"></p>
-            <p class="trip duration"></p>
-            <p class="trip status"></p>
+            <p class="trip date">trip date</p>
+            <p class="trip number-of-travelers">no of traveler</p>
+            <p class="trip total-cost">total cose</p>
+            <p class="trip duration">duration</p>
+            <p class="trip status">status</p>
           </section>
-        </div>
-        <div class="total-section">
-          <h2 class="total">Total Spent on Trips This Year</h2>
+        </section>
+        <section class="total-section">
+          <h3 class="total">Total Spent on Trips This Year</h3>
           <p class="total"></p>
-        </div>
+        </section>
       </main>
     </section>
     <script src="bundle.js"></script>

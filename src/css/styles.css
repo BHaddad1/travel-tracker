@@ -1,3 +1,92 @@
 body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+
+.login-page,
+.login {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  justify-content: center;
+}
+
+.login-button {
+  background-color: #ff385c;
+  border: none;
+  border-radius: 5px;
+  height: 4vh;
+  width: 7vw;
+}
+
+.login-input {
+  height: 5vh;
+}
+
+.username-section,
+.password-section {
+  margin-top: 5%;
+}
+
+.username-error {
+  color: red;
+  font-size: 1.2em;
+}
+
+.hidden {
+  display: none;
+}
+
+.search-container {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  height: 30vh;
+  justify-content: space-between;
+  margin-top: 3%;
+  width: 100vw;
+}
+
+.logo {
+  height: 20vh;
+  width: 10vw;
+}
+
+.all-trips-container {
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  width: 100vw;
+}
+
+.search-button-container {
+  display: flex;
+  flex-direction: column;
+  height: 10vh;
+  justify-content: space-between;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50vw;
+}
+
+.trips-button,
+.logout-button,
+.trip-cost-button,
+.request-trip-button {
+  background-color: #ff385c;
+  border: none;
+  border-radius: 5px;
+  height: 4vh;
+  width: 14vw;
+}
+
+.button {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 300;
 }
