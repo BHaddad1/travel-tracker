@@ -44,11 +44,12 @@ body {
   flex-direction: row;
   height: 30vh;
   justify-content: space-between;
+  margin-top: 3%;
   width: 100vw;
 }
 
 .logo {
-  height: 14vh;
+  height: 20vh;
   width: 10vw;
 }
 
@@ -59,6 +60,13 @@ body {
   width: 100vw;
 }
 
+.search-button-container {
+  display: flex;
+  flex-direction: column;
+  height: 10vh;
+  justify-content: space-between;
+}
+
 .button-container {
   display: flex;
   flex-direction: row;
@@ -66,13 +74,19 @@ body {
   width: 50vw;
 }
 
-.button,
+.trips-button,
 .logout-button,
 .trip-cost-button,
-.request-trip-button { 
+.request-trip-button {
   background-color: #ff385c;
   border: none;
   border-radius: 5px;
   height: 4vh;
   width: 14vw;
+}
+
+.button {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 300;
 }

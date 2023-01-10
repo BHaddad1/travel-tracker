@@ -24,7 +24,7 @@
             <input type="text" class="login-input" id="password" required placeholder="Password"/>
           </section>
           <p class="username-error hidden">Incorrect username & password combination</p>
-          <button class="login-button" type="button">Login</button>
+          <button class="login-button button" type="button">Login</button>
         </form>
       </section>
     </section>
@@ -41,20 +41,22 @@
           <input id="travelers" class="destination" type="number" placeholder="No. of Travelers" required minlength="1" min="1"/>
           <label class="first-day">Leaving on:</label>
           <input class="date-input" id="dateInput" type="date" value="yyyy-MM-dd" placeholder="date" required/>
-          <button type="button" name="button" class="trip-cost-button" id="">Get Total Cost</button>
           <p class="" id="total-cost">Total for Requested Trip</p>
-          <button type="button" name="button" class="request-trip-button" id="">Request Trip</button>
           <p type="button" name="button" class="" id="trip-requested-message">Your trip has been requested and is pending. You'll hear back from an agent shortly!</p>
         </form>
+        <section class="search-button-container">
+          <button type="button" name="button" class="trip-cost-button button" id="">Get Total Cost</button>
+          <button type="button" name="button" class="request-trip-button button" id="">Request Trip</button>
+        </section>
         <section class="logout">
-          <button class="logout-button" type="button">Log Out</button>
+          <button class="logout-button button" type="button">Log Out</button>
         </section>
       </nav>
       <main class="main-container">
         <section class="button-container">
-          <button type="button" name="button" class="button" id="all-trips">All Trips</button>
-          <button type="button" name="button" class="button" id="approved-trips">Approved Trips</button>
-          <button type="button" name="button" class="button" id="pending-trips">Pending Trips</button>
+          <button type="button" name="button" class="trips-button button" id="all-trips">All Trips</button>
+          <button type="button" name="button" class="trips-button button" id="approved-trips">Approved Trips</button>
+          <button type="button" name="button" class="trips-button button" id="pending-trips">Pending Trips</button>
         </section>
         <section class="all-trips-container">
           <section class="trip-card-template">
