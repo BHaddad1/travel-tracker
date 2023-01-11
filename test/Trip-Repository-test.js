@@ -67,4 +67,44 @@ describe("Trip Repository", () => {
     expect(tripRepository.filterTripsByStatus("approved", 3)).to.deep.equal(a);
     expect(tripRepository.filterTripsByStatus("pending", 38)).to.deep.equal(b);
   });
+  it("should be able to find upcoming trips for a user", () => {
+    const a = [
+      {
+        id: 11,
+        userID: 50,
+        destinationID: 5,
+        travelers: 4,
+        date: "2022/10/14",
+        duration: 4,
+        status: "approved",
+        suggestedActivities: [],
+      },
+      {
+        id: 15,
+        userID: 50,
+        destinationID: 13,
+        travelers: 3,
+        date: "2022/07/04",
+        duration: 6,
+        status: "approved",
+        suggestedActivities: [],
+      },
+    ];
+    expect(tripRepository.findUpcomingTrips(50)).to.deep.equal(a);
+  });
+  it("should be able to find past trips for a traveler", () => {
+    const a = [
+      {
+        id: 201,
+        userID: 44,
+        destinationID: 20,
+        travelers: 3,
+        date: "2021/08/08",
+        duration: 7,
+        status: "approved",
+        suggestedActivities: [],
+      },
+    ];
+    expect(tripRepository.findPastTrips(44)).to.deep.equal(a);
+  });
 });

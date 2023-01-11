@@ -209,6 +209,16 @@ const trips = [
     status: "pending",
     suggestedActivities: [],
   },
+  {
+    id: 201,
+    userID: 44,
+    destinationID: 20,
+    travelers: 3,
+    date: "2021/08/08",
+    duration: 7,
+    status: "approved",
+    suggestedActivities: [],
+  },
 ];
 
 export default trips;
