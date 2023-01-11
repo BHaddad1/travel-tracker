@@ -51,7 +51,7 @@ Promise.all([
     allTravelers = data[0];
     allTrips = data[1];
     allDestinations = data[2];
-    createClassInstances(allTravelers, allTrips, allDestinations);
+    createClassInstances(allTravelers.travelers, allTrips.trips, allDestinations.destinations);
   })
   .catch((err) => {
     console.log(err);
@@ -95,5 +95,5 @@ function displayTotalSpent() {
 };
 
 function displayAllTrips() {
-  
+  const allDestinations = 
 }
