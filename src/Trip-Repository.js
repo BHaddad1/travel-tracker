@@ -6,7 +6,7 @@ class TripRepository {
     this.destinationData = destinationData;
   }
   filterByTravelerID(id) {
-    return this.tripData.filter(trip => trip.userID === id);
+    return this.tripData.trips.filter(trip => trip.userID === id);
   }
   filterTripsByStatus(status, id) {
     return this.filterByTravelerID(id).filter(trip => trip.status === status);
@@ -26,7 +26,7 @@ class TripRepository {
     });
   }
   findDestinationByName(name) {
-    const foundDestination = this.destinationData.find((destination) => destination.destination === name);
+    const foundDestination = this.destinationData.destinations.find((destination) => destination.destination === name);
     if (!foundDestination) {
       return "No such destination.";
     }
@@ -40,7 +40,7 @@ class TripRepository {
       return year === "2021";
     })
     const thisYearsDestinations = tripsThisYear.map(trip => trip.destinationID).reduce((acc, cur) => {
-      this.destinationData.forEach(dest => {
+      this.destinationData.destinations.forEach(dest => {
         if (dest.id === cur) {
           acc.push(dest);
         };

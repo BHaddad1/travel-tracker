@@ -10,7 +10,7 @@
     <title>Catravel</title>
   </head>
   <body>
-    <section class="login-page hidden">
+    <section class="login-page hidden" id="login-section">
       <section class="login-container">
         <form class="login">
           <img src="./images/catTravel2.jpg" class="logo" alt="Cat icon with a plane through the head">
@@ -23,12 +23,12 @@
             <label class="password" for="password">Password</label>
             <input type="text" class="login-input" id="password" required placeholder="Password"/>
           </section>
-          <p class="username-error hidden">Incorrect username & password combination</p>
-          <button class="login-button button" type="button">Login</button>
+          <p class="username-error hidden" id="login-error">Incorrect username & password combination</p>
+          <button class="login-button button" type="button" id="login-button">Login</button>
         </form>
       </section>
     </section>
-    <section class="traveler-view">
+    <section class="traveler-view" id="traveler-page">
       <nav class="search-container">
         <section class="logo-container">
           <img src="./images/catTravel2.jpg" class="logo" alt="Cat icon with a plane through the head">
@@ -44,6 +44,9 @@
           <p class="" id="total-cost">Total for Requested Trip</p>
           <p type="button" name="button" class="" id="trip-requested-message">Your trip has been requested and is pending. You'll hear back from an agent shortly!</p>
         </form>
+        <section class="error-handling hidden" id="error-message">
+          <h2></h2>
+        </section>
         <section class="search-button-container">
           <button type="button" name="button" class="trip-cost-button button" id="">Get Total Cost</button>
           <button type="button" name="button" class="request-trip-button button" id="">Request Trip</button>
@@ -55,10 +58,10 @@
       <main class="main-container">
         <section class="button-container">
           <button type="button" name="button" class="trips-button button" id="all-trips">All Trips</button>
-          <button type="button" name="button" class="trips-button button" id="approved-trips">Approved Trips</button>
-          <button type="button" name="button" class="trips-button button" id="pending-trips">Pending Trips</button>
+          <button type="button" name="button" class="trips-button button" id="past-trips">Past Trips</button>
+          <button type="button" name="button" class="trips-button button" id="upcoming-trips">Upcoming Trips</button>
         </section>
-        <section class="all-trips-container">
+        <section class="all-trips-container" id="trips-container">
           <section class="trip-card-template">
             <img alt="" src="" />
             <p class="trip trip-name">Destination Name</p>
@@ -70,7 +73,7 @@
           </section>
         </section>
         <section class="total-section">
-          <h3 class="total">Total Spent on Trips This Year</h3>
+          <h3 class="total" id="total">Total Spent on Trips This Year</h3>
           <p class="total"></p>
         </section>
       </main>

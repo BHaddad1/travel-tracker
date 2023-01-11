@@ -3,7 +3,7 @@ class TravelerRepository {
     this.allTravelerData = allTravelerData;
   }
   findTravelerById(id) {
-    return this.allTravelerData.find(traveler => traveler.id === id);
+    return this.allTravelerData.travelers.find(traveler => traveler.id === id);
   }
 };
 
