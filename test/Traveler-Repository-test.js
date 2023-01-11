@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import TravelerRepository from "../src/Traveler-Repository";
-import travelers from "../src/data/travelers";
+import travelers from "../src/data/travelers-data";
 
 describe("Traveler Repository", () => {
   let travelerRepository;
