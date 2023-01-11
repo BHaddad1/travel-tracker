@@ -41,6 +41,7 @@ const getData = (url) => {
     })
     .catch((err) => console.log(err));
 };
+
 Promise.all([
   getData("http://localhost:3001/api/v1/travelers"),
   getData("http://localhost:3001/api/v1/trips"),
@@ -48,10 +49,10 @@ Promise.all([
 ])
   .then((data) => {
     console.log(data);
-    allTravelers = data[0];
-    allTrips = data[1];
-    allDestinations = data[2];
-    createClassInstances(allTravelers.travelers, allTrips.trips, allDestinations.destinations);
+    allTravelers = data[0].travelers;
+    allTrips = data[1].trips;
+    allDestinations = data[2].destinations;
+    createClassInstances(allTravelers, allTrips, allDestinations);
   })
   .catch((err) => {
     console.log(err);
@@ -62,7 +63,7 @@ Promise.all([
 function createClassInstances(data1, data2, data3) {
   travelerRepository = new TravelerRepository(data1);
   tripRepository = new TripRepository(data2, data3);
-};
+}
 
 function logInTraveler() {
   const traveler = username.value.substr(0, 8);
@@ -88,12 +89,28 @@ function logInTraveler() {
   } else if (traveler !== "traveler" || password.value !== "travel") {
     loginErrorMessage.classList.remove("hidden");
   }
-};
+}
 
 function displayTotalSpent() {
-  totalSection.innerText = `Total Spent on Trips This Year: $${tripRepository.calculateCostPerYear(currentTravelerId)}`;
-};
+  totalSection.innerText = `Total Spent on Trips This Year: $${tripRepository.calculateCostPerYear(
+    currentTravelerId
+  )}`;
+}
 
 function displayAllTrips() {
-  const allDestinations = 
-}
+  const allDestinations = tripRepository.findDestinationsForUser(currentTravelerId);
+  allDestinations.forEach(destination => {
+    const tripInfo = tripRepository.filterByTravelerID(currentTravelerId).forEach(trip => {
+      tripsContainer.innerHTML += `
+      <section class="trip-card-template">
+        <img class="card-image" alt="${destination.alt}" src="${destination.image}" />
+        <p class="trip trip-name">Going To: ${destination.destination}</p>
+        <p class="trip date">Leaving On: ${trip.date}</p>
+        <p class="trip number-of-travelers">${trip.travelers} Travelers</p>
+        <p class="trip duration">${trip.duration} Days</p>
+        <p class="trip status">Status: ${trip.status}</p>
+      </section>
+    `;
+    });
+  });
+};
