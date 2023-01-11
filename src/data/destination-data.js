@@ -98,3 +98,5 @@ const destinations = [
     alt: "cityscape along the water during the day",
   },
 ];
+
+export default destinations;
