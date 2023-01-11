@@ -13,6 +13,7 @@ let allDestinations;
 let travelerRepository;
 let tripRepository;
 let currentTraveler;
+let currentTravelerId;
 
 const totalSection = document.getElementById("total");
 const tripsContainer = document.getElementById("trips-container");
@@ -27,6 +28,7 @@ const loginErrorMessage = document.getElementById("login-error");
 loginButton.addEventListener("click", () => {
   logInTraveler();
   displayTotalSpent();
+  displayAllTrips();
 });
 
 const getData = (url) => {
@@ -80,13 +82,18 @@ function logInTraveler() {
     const joinedId = id.join("");
     const number = Number(joinedId);
     currentTraveler = travelerRepository.findTravelerById(number);
+    currentTravelerId = currentTraveler.id;
     loginSection.classList.add("hidden");
-    travelerPage.classList.remove("hidden")
+    travelerPage.classList.remove("hidden");
   } else if (traveler !== "traveler" || password.value !== "travel") {
     loginErrorMessage.classList.remove("hidden");
   }
 };
 
 function displayTotalSpent() {
-  totalSection.innerText = `Total Spent on Trips This Year: ${tripRepository.calculateCostPerYear()}`;
+  totalSection.innerText = `Total Spent on Trips This Year: $${tripRepository.calculateCostPerYear(currentTravelerId)}`;
 };
+
+function displayAllTrips() {
+  
+}
