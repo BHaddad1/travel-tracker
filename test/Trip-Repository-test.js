@@ -90,6 +90,21 @@ describe("Trip Repository", () => {
         suggestedActivities: [],
       },
     ];
-    expect(tripRepository.findTripsByDate(50)).to.deep.equal(a);
+    expect(tripRepository.findUpcomingTrips(50)).to.deep.equal(a);
+  });
+  it("should be able to find past trips for a traveler", () => {
+    const a = [
+      {
+        id: 201,
+        userID: 44,
+        destinationID: 20,
+        travelers: 3,
+        date: "2021/08/08",
+        duration: 7,
+        status: "approved",
+        suggestedActivities: [],
+      },
+    ];
+    expect(tripRepository.findPastTrips(44)).to.deep.equal(a);
   });
 });
