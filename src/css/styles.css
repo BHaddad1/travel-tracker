@@ -17,6 +17,7 @@ body {
   border: none;
   border-radius: 5px;
   height: 4vh;
+  margin-top: 5%;
   width: 7vw;
 }
 
@@ -82,7 +83,7 @@ body {
   border: none;
   border-radius: 5px;
   height: 4vh;
-  width: 14vw;
+  width: 16vw;
 }
 
 .button {

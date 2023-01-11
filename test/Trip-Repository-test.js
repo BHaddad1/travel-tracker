@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import TripRepository from "../src/Trip-Repository";
 import trips from "../src/data/trips-data";
-import destinations from "../src/data/destination-data"
+import destinations from "../src/data/destination-data";
 
 describe("Trip Repository", () => {
   let tripRepository;
@@ -114,10 +114,37 @@ describe("Trip Repository", () => {
     expect(tripRepository.findPastTrips(44)).to.deep.equal(a);
   });
   it("should find the destination by name", () => {
-    expect(tripRepository.findDestinationByName("Lima, Peru")).to.deep.equal(destinationData[0]);
-    expect(tripRepository.findDestinationByName("New York")).to.equal("No such destination.")
+    expect(tripRepository.findDestinationByName("Lima, Peru")).to.deep.equal(
+      destinationData[0]
+    );
+    expect(tripRepository.findDestinationByName("New York")).to.equal(
+      "No such destination."
+    );
   });
   it("should calculate the cost of all trips for this year", () => {
     expect(tripRepository.calculateCostPerYear(44)).to.equal(2124);
+  });
+  it("should find all destinations for a traveler by their id", () => {
+    const a = [
+      {
+        id: 49,
+        destination: "Castries, St Lucia",
+        estimatedLodgingCostPerDay: 650,
+        estimatedFlightCostPerPerson: 90,
+        image:
+          "https://images.unsplash.com/photo-1524478075552-c2763ea171b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80",
+        alt: "aerial photography of rocky mountain under cloudy sky",
+      },
+      {
+        id: 20,
+        destination: "Miami, Florida",
+        estimatedLodgingCostPerDay: 158,
+        estimatedFlightCostPerPerson: 275,
+        image:
+          "https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1573&q=80",
+        alt: "sand with palm trees and tall buildings in the background",
+      },
+    ];
+    expect(tripRepository.findDestinationsForUser(44)).to.deep.equal(a);
   });
 });

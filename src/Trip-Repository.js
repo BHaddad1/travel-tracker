@@ -55,6 +55,16 @@ class TripRepository {
     }, 0)
     return Number(total.toFixed(0));
   }
+  findDestinationsForUser(id) {
+    return this.filterByTravelerID(id).reduce((acc, cur) => {
+      this.destinationData.forEach(destination => {
+        if (destination.id === cur.destinationID) {
+          acc.push(destination);
+        }
+      })
+      return acc;
+    }, [])
+  }
 };
 
 export default TripRepository;
