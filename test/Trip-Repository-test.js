@@ -1,11 +1,13 @@
 import { expect } from "chai";
 import TripRepository from "../src/Trip-Repository";
 import trips from "../src/data/trips-data";
+import destinations from "../src/data/destination-data"
 
 describe("Trip Repository", () => {
   let tripRepository;
   let tripData;
   let traveler;
+  let destinationData;
   beforeEach(() => {
     traveler = {
       id: 3,
@@ -13,7 +15,8 @@ describe("Trip Repository", () => {
       travelerType: "shopper",
     };
     tripData = trips;
-    tripRepository = new TripRepository(tripData);
+    destinationData = destinations;
+    tripRepository = new TripRepository(tripData, destinationData);
   });
   it("should be a function", () => {
     expect(TripRepository).to.be.a("function");
@@ -22,7 +25,10 @@ describe("Trip Repository", () => {
     expect(tripRepository).to.be.an.instanceOf(TripRepository);
   });
   it("should hold all trip data", () => {
-    expect(tripRepository.allTripData).to.deep.equal(tripData);
+    expect(tripRepository.tripData).to.deep.equal(tripData);
+  });
+  it("should hold all destination data", () => {
+    expect(tripRepository.destinationData).to.deep.equal(destinationData);
   });
   it("should find all trips for a traveler by their ID", () => {
     const a = [
@@ -106,5 +112,25 @@ describe("Trip Repository", () => {
       },
     ];
     expect(tripRepository.findPastTrips(44)).to.deep.equal(a);
+  });
+  it("should find the destination by name", () => {
+    expect(tripRepository.findDestinationByName("Lima, Peru")).to.deep.equal(destinationData[0]);
+    expect(tripRepository.findDestinationByName("New York")).to.equal("No such destination.")
+  });
+  it.skip("should calculate the cost of a single trip", () => {
+    const traveler44 =  {
+      id: 1,
+      userID: 44,
+      destinationID: 49,
+      travelers: 1,
+      date: "2022/09/16",
+      duration: 8,
+      status: "approved",
+      suggestedActivities: [],
+    };
+    expect(tripRepository.calculateCostOfTrip(44)).to.equal(null);
+  });
+  it("should calculate the cost of all trips for this year", () => {
+    expect(tripRepository.calculateCostPerYear(44)).to.equal(2124);
   });
 });
