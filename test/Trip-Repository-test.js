@@ -117,19 +117,6 @@ describe("Trip Repository", () => {
     expect(tripRepository.findDestinationByName("Lima, Peru")).to.deep.equal(destinationData[0]);
     expect(tripRepository.findDestinationByName("New York")).to.equal("No such destination.")
   });
-  it.skip("should calculate the cost of a single trip", () => {
-    const traveler44 =  {
-      id: 1,
-      userID: 44,
-      destinationID: 49,
-      travelers: 1,
-      date: "2022/09/16",
-      duration: 8,
-      status: "approved",
-      suggestedActivities: [],
-    };
-    expect(tripRepository.calculateCostOfTrip(44)).to.equal(null);
-  });
   it("should calculate the cost of all trips for this year", () => {
     expect(tripRepository.calculateCostPerYear(44)).to.equal(2124);
   });
