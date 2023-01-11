@@ -32,13 +32,6 @@ class TripRepository {
     }
     return foundDestination;
   }
-  calculateCostOfTrip(travelerID) {
-    // find a travelers trips
-    // find one trip
-    // find destination
-    // get stats from destination
-    // do math 
-  }
   calculateCostPerYear(travelerID) {
     const travelersTrips = this.filterByTravelerID(travelerID);
     const tripsThisYear = travelersTrips.filter(trip => {
