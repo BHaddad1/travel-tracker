@@ -4,6 +4,6 @@ class Traveler {
     this.name = travelerObj.name;
     this.travelerType = travelerObj.travelerType;
   }
-}
+};
 
 export default Traveler;

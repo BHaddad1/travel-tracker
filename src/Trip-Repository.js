@@ -8,6 +8,6 @@ class TripRepository {
   filterTripsByStatus(status, id) {
     return this.filterByTravelerID(id).filter(trip => trip.status === status);
   }
-}
+};
 
 export default TripRepository;

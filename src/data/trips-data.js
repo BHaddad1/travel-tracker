@@ -199,4 +199,16 @@ const trips = [
     status: "approved",
     suggestedActivities: [],
   },
+  {
+    id: 71,
+    userID: 38,
+    destinationID: 28,
+    travelers: 1,
+    date: "2020/05/26",
+    duration: 11,
+    status: "pending",
+    suggestedActivities: [],
+  },
 ];
+
+export default trips;

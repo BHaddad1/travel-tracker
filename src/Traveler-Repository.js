@@ -5,6 +5,6 @@ class TravelerRepository {
   findTravelerById(id) {
     return this.allTravelerData.find(traveler => traveler.id === id);
   }
-}
+};
 
 export default TravelerRepository;

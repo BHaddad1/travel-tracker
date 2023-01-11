@@ -9,6 +9,6 @@ class Trip {
     this.status = trip.status;
     this.suggestedActivities = trip.suggestedActivities;
   }
-}
+};
 
 export default Trip;
