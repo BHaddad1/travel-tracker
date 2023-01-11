@@ -8,3 +8,5 @@ import './css/styles.css';
 import './images/turing-logo.png';
 import "./images/catTravel2.jpg"
 
+const dayjs = require('dayjs')
+dayjs().format()
