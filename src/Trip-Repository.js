@@ -1,11 +1,12 @@
 import * as dayjs from "dayjs";
 
 class TripRepository {
-  constructor(allTripData) {
-    this.allTripData = allTripData;
+  constructor(allTripData, destinationData) {
+    this.tripData = allTripData;
+    this.destinationData = destinationData;
   }
   filterByTravelerID(id) {
-    return this.allTripData.filter(trip => trip.userID === id);
+    return this.tripData.filter(trip => trip.userID === id);
   }
   filterTripsByStatus(status, id) {
     return this.filterByTravelerID(id).filter(trip => trip.status === status);
@@ -23,6 +24,36 @@ class TripRepository {
       let dateA = dayjs(trip.date);
       return dateA.isBefore(today);
     });
+  }
+  findDestinationByName(name) {
+    const foundDestination = this.destinationData.find((destination) => destination.destination === name);
+    if (!foundDestination) {
+      return "No such destination.";
+    }
+    return foundDestination;
+  }
+  calculateCostPerYear(travelerID) {
+    const travelersTrips = this.filterByTravelerID(travelerID);
+    const tripsThisYear = travelersTrips.filter(trip => {
+      const splitDate = trip.date.split("/");
+      const year = splitDate[0];
+      return year === "2021";
+    })
+    const thisYearsDestinations = tripsThisYear.map(trip => trip.destinationID).reduce((acc, cur) => {
+      this.destinationData.forEach(dest => {
+        if (dest.id === cur) {
+          acc.push(dest);
+        };
+      });
+      return acc;
+    }, []);
+    const total = tripsThisYear.reduce((acc, cur) => {
+      const overlap = thisYearsDestinations.find(dest => dest.id === cur.destinationID)
+      acc += (overlap.estimatedLodgingCostPerDay * cur.duration) * 1.1;
+      acc += (overlap.estimatedFlightCostPerPerson * cur.travelers) *  1.1;
+      return acc;
+    }, 0)
+    return Number(total.toFixed(0));
   }
 };
 
