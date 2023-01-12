@@ -136,3 +136,7 @@ function displayTrips(tripsData) {
     `;
   });
 };
+
+function createPostObject() {
+  
+}
