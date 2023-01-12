@@ -98,9 +98,10 @@ function displayTotalSpent() {
 }
 
 function displayAllTrips() {
-  const allDestinations = tripRepository.findDestinationsForUser(currentTravelerId);
-  allDestinations.forEach(destination => {
-    const tripInfo = tripRepository.filterByTravelerID(currentTravelerId).forEach(trip => {
+  const allTrips = tripRepository.filterByTravelerID(currentTravelerId);
+  allTrips.forEach(trip => {
+    const destination = tripRepository.findDestinationById(trip.destinationID)
+    console.log(currentTravelerId)
       tripsContainer.innerHTML += `
       <section class="trip-card-template">
         <img class="card-image" alt="${destination.alt}" src="${destination.image}" />
@@ -110,7 +111,6 @@ function displayAllTrips() {
         <p class="trip duration">${trip.duration} Days</p>
         <p class="trip status">Status: ${trip.status}</p>
       </section>
-    `;
-    });
+    `; 
   });
 };

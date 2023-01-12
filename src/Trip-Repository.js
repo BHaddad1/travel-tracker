@@ -32,6 +32,9 @@ class TripRepository {
     }
     return foundDestination;
   }
+  findDestinationById(tripId) {
+    return this.destinationData.find(destination => destination.id === tripId);
+  }
   calculateCostPerYear(travelerID) {
     const travelersTrips = this.filterByTravelerID(travelerID);
     const tripsThisYear = travelersTrips.filter(trip => {
