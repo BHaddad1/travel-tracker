@@ -17,6 +17,7 @@ let currentTravelerId;
 let allTripsData;
 let pastTripsData;
 let upcomingTripsData;
+let pendingTripsData;
 
 const totalSection = document.getElementById("total");
 const tripsContainer = document.getElementById("trips-container");
@@ -30,6 +31,7 @@ const loginErrorMessage = document.getElementById("login-error");
 const upcomingTripsButton = document.getElementById("upcoming-trips");
 const allTripsButton = document.getElementById("all-trips");
 const pastTripsButton = document.getElementById("past-trips");
+const pendingTripsButton = document.getElementById("pending-trips");
 
 loginButton.addEventListener("click", () => {
   logInTraveler();
@@ -48,6 +50,10 @@ pastTripsButton.addEventListener("click", () => {
   tripsContainer.innerHTML = "";
   displayTrips(pastTripsData);
 });
+pendingTripsButton.addEventListener("click", () => {
+  tripsContainer.innerHTML = "";
+  displayTrips(pendingTripsData);
+})
 
 const getData = (url) => {
   return fetch(url)
@@ -103,6 +109,7 @@ function logInTraveler() {
     allTripsData = tripRepository.filterByTravelerID(currentTravelerId);
     pastTripsData = tripRepository.findPastTrips(currentTravelerId);
     upcomingTripsData = tripRepository.findUpcomingTrips(currentTravelerId);
+    pendingTripsData = tripRepository.filterTripsByStatus("pending", currentTravelerId);
     loginSection.classList.add("hidden");
     travelerPage.classList.remove("hidden");
   } else if (traveler !== "traveler" || password.value !== "travel") {
