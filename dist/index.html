@@ -37,26 +37,25 @@
           <h2>Today is December 31, 2021</h2>
         </section>
         <form class="trip-search-form">
-          <label for="destinations">Destinations</label>
-          <select class="destination" type="text" name="destinations" id="destinations" autofocus size="50" required>
+          <label for="destinations" class="hidden">Destinations</label>
+          <select class="destination" type="text" name="destinations" id="destinations" autofocus required>
+            <option class="destinations" name="destinations">Destinations</option>
           </select>
-          <label for="travelers" class="travelers">Number of Travelers</label>
-          <input id="travelers" class="destination" type="number" placeholder="No. of Travelers" required minlength="1" min="1"/>
+          <label for="travelers" class="travelers hidden">Number of Travelers</label>
+          <input id="travelers" class="travelers" type="number" placeholder="No. of Travelers" required minlength="1" min="1"/>
           <label class="first-day">Leaving on:</label>
-          <input class="date-input" id="dateInput" type="date" value="yyyy-MM-dd" placeholder="date" required/>
-          <p class="" id="total-cost">Total for Requested Trip</p>
-          <p type="button" name="button" class="" id="trip-requested-message">Your trip has been requested and is pending. You'll hear back from an agent shortly!</p>
+          <input class="date-input" id="date-input" type="date" value="yyyy-MM-dd" placeholder="date" required/>
+          <label class="duration hidden" id="duration">Duration</label>
+          <input for="duration" class="duration-input" id="duration-input" required min="1" minlength="1" placeholder="Duration of Stay">
+          <h3 class="new-trip-total hidden" id="total-trip-cost">Total for Requested Trip</h3>
+          <p type="button" name="button" class="hidden" id="trip-requested-message"></p>
         </form>
         <section class="error-handling hidden" id="error-message">
           <h2></h2>
         </section>
-        <section class="total-section">
-          <h3 class="total" id="total">Total Spent on Trips This Year</h3>
-          <p class="total"></p>
-        </section>
         <section class="search-button-container">
-          <button type="button" name="button" class="trip-cost-button button" id="">Get Total Cost</button>
-          <button type="button" name="button" class="request-trip-button button" id="">Request Trip</button>
+          <button type="button" name="button" class="trip-cost-button button" id="total-cost">Get Total Cost</button>
+          <button type="button" name="button" class="request-trip-button button" id="request-trip">Request Trip</button>
         </section>
         <section class="logout">
           <button class="logout-button button" type="button">Log Out</button>
@@ -70,6 +69,10 @@
           <button type="button" name="button" class="trips-button button" id="pending-trips">Pending Trips</button>
         </section>
         <section class="all-trips-container" id="trips-container">
+        </section>
+        <section class="total-section">
+          <h3 class="total" id="total">Total Spent on Trips This Year</h3>
+          <p class="total"></p>
         </section>
       </main>
     </section>
