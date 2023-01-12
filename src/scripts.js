@@ -19,7 +19,6 @@ let pastTripsData;
 let upcomingTripsData;
 let pendingTripsData;
 
-
 const totalSection = document.getElementById("total");
 const tripsContainer = document.getElementById("trips-container");
 const errorMessage = document.getElementById("error-message");
@@ -66,7 +65,6 @@ pendingTripsButton.addEventListener("click", () => {
 });
 totalCostButton.addEventListener("click", displayCost);
 requestTripButton.addEventListener("click", createPost);
-
 
 const getData = (url) => {
   return fetch(url)
@@ -142,6 +140,7 @@ function displayTotalSpent() {
 function displayTrips(tripsData) {
   tripsData.forEach((trip) => {
     const destination = tripRepository.findDestinationById(trip.destinationID);
+    console.log(destination);
     tripsContainer.innerHTML += `
       <section class="trip-card-template">
         <img class="card-image" alt="${destination.alt}" src="${destination.image}" />
@@ -176,9 +175,12 @@ function createPost() {
   if (preverDuplicates(allTrips, currentTravelerId, dateInput.value)) {
     postMessage.classList.remove("hidden");
     postMessage.innerText = "Please select another date to depart from.";
+    return;
   } else {
     if (dropdown.value && duration.value && numberOfTravelers.value) {
-      const destinationId = allDestinations.find(destination => destination.destination === dropdown.value)
+      const destinationId = allDestinations.find(
+        (destination) => destination.destination === dropdown.value
+      );
       const tripObject = {
         id: allTrips.length + 1,
         userID: currentTravelerId,
@@ -190,9 +192,6 @@ function createPost() {
         suggestedActivities: [],
       };
       postTrip(tripObject);
-      allTrips.push(tripObject);
-      allTripsForTraveler.push(tripObject);
-      pendingTripsData.push(tripObject);
       tripsContainer.innerHTML = "";
       displayTrips(allTripsForTraveler);
     }
@@ -217,6 +216,15 @@ function postTrip(data) {
       postMessage.classList.remove("hidden");
       postMessage.innerText =
         "Success! Your trip has been requested and is pending. You'll hear back from an agent shortly!";
+      return getData("http://localhost:3001/api/v1/trips")
+        .then((data) => {
+          tripRepository = new TripRepository(data.trips, allDestinations);
+          allTripsForTraveler = tripRepository.filterByTravelerID(currentTravelerId);
+          pastTripsData = tripRepository.findPastTrips(currentTravelerId);
+          upcomingTripsData = tripRepository.findUpcomingTrips(currentTravelerId);
+          pendingTripsData = tripRepository.filterTripsByStatus("pending", currentTravelerId);
+        })
+        .catch((err) => console.log(err));
     })
     .catch((err) => {
       postMessage.classList.remove("hidden");
