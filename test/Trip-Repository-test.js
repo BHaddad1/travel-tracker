@@ -121,6 +121,18 @@ describe("Trip Repository", () => {
       "No such destination."
     );
   });
+  it("should find a destination by id", () => {
+    const a = {
+      id: 20,
+      destination: "Miami, Florida",
+      estimatedLodgingCostPerDay: 158,
+      estimatedFlightCostPerPerson: 275,
+      image:
+        "https://images.unsplash.com/photo-1514214246283-d427a95c5d2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1573&q=80",
+      alt: "sand with palm trees and tall buildings in the background",
+    };
+    expect(tripRepository.findDestinationById(20)).to.deep.equal(a);
+  });
   it("should calculate the cost of all trips for this year", () => {
     expect(tripRepository.calculateCostPerYear(44)).to.equal(2124);
   });
