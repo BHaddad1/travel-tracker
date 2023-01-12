@@ -14,10 +14,11 @@ let travelerRepository;
 let tripRepository;
 let currentTraveler;
 let currentTravelerId;
-let allTripsData;
+let allTripsForTraveler;
 let pastTripsData;
 let upcomingTripsData;
 let pendingTripsData;
+
 
 const totalSection = document.getElementById("total");
 const tripsContainer = document.getElementById("trips-container");
@@ -32,11 +33,20 @@ const upcomingTripsButton = document.getElementById("upcoming-trips");
 const allTripsButton = document.getElementById("all-trips");
 const pastTripsButton = document.getElementById("past-trips");
 const pendingTripsButton = document.getElementById("pending-trips");
+const dropdown = document.getElementById("destinations");
+const totalCostButton = document.getElementById("total-cost");
+const totalCostSection = document.getElementById("total-trip-cost");
+const duration = document.getElementById("duration-input");
+const numberOfTravelers = document.getElementById("travelers");
+const postMessage = document.getElementById("trip-requested-message");
+const dateInput = document.getElementById("date-input");
+const requestTripButton = document.getElementById("request-trip");
 
 loginButton.addEventListener("click", () => {
   logInTraveler();
   displayTotalSpent();
-  displayTrips(allTripsData);
+  displayTrips(allTripsForTraveler);
+  createDropdown();
 });
 upcomingTripsButton.addEventListener("click", () => {
   tripsContainer.innerHTML = "";
@@ -44,7 +54,7 @@ upcomingTripsButton.addEventListener("click", () => {
 });
 allTripsButton.addEventListener("click", () => {
   tripsContainer.innerHTML = "";
-  displayTrips(allTripsData);
+  displayTrips(allTripsForTraveler);
 });
 pastTripsButton.addEventListener("click", () => {
   tripsContainer.innerHTML = "";
@@ -53,7 +63,10 @@ pastTripsButton.addEventListener("click", () => {
 pendingTripsButton.addEventListener("click", () => {
   tripsContainer.innerHTML = "";
   displayTrips(pendingTripsData);
-})
+});
+totalCostButton.addEventListener("click", displayCost);
+requestTripButton.addEventListener("click", createPost);
+
 
 const getData = (url) => {
   return fetch(url)
@@ -85,7 +98,7 @@ Promise.all([
 function createClassInstances(data1, data2, data3) {
   travelerRepository = new TravelerRepository(data1);
   tripRepository = new TripRepository(data2, data3);
-};
+}
 
 function logInTraveler() {
   const traveler = username.value.substr(0, 8);
@@ -106,20 +119,25 @@ function logInTraveler() {
     const number = Number(joinedId);
     currentTraveler = travelerRepository.findTravelerById(number);
     currentTravelerId = currentTraveler.id;
-    allTripsData = tripRepository.filterByTravelerID(currentTravelerId);
+    allTripsForTraveler = tripRepository.filterByTravelerID(currentTravelerId);
     pastTripsData = tripRepository.findPastTrips(currentTravelerId);
     upcomingTripsData = tripRepository.findUpcomingTrips(currentTravelerId);
-    pendingTripsData = tripRepository.filterTripsByStatus("pending", currentTravelerId);
+    pendingTripsData = tripRepository.filterTripsByStatus(
+      "pending",
+      currentTravelerId
+    );
     loginSection.classList.add("hidden");
     travelerPage.classList.remove("hidden");
   } else if (traveler !== "traveler" || password.value !== "travel") {
     loginErrorMessage.classList.remove("hidden");
   }
-};
+}
 
 function displayTotalSpent() {
-  totalSection.innerText = `Total Spent on Trips This Year: $${tripRepository.calculateCostPerYear(currentTravelerId)}`;
-};
+  totalSection.innerText = `Total Spent on Trips This Year: $${tripRepository.calculateCostPerYear(
+    currentTravelerId
+  )}`;
+}
 
 function displayTrips(tripsData) {
   tripsData.forEach((trip) => {
@@ -135,8 +153,80 @@ function displayTrips(tripsData) {
       </section>
     `;
   });
-};
+}
 
-function createPostObject() {
-  
+function createDropdown() {
+  allDestinations.forEach((destination) => {
+    dropdown.innerHTML += `
+    <option value="${destination.destination}">${destination.destination}</option>
+    `;
+  });
+}
+
+function displayCost() {
+  const destination = tripRepository.findDestinationByName(dropdown.value);
+  const total =
+    destination.estimatedLodgingCostPerDay * duration.value +
+    destination.estimatedFlightCostPerPerson * numberOfTravelers.value;
+  totalCostSection.classList.remove("hidden");
+  totalCostSection.innerText = `$${total} for this new trip`;
+}
+
+function createPost() {
+  if (preverDuplicates(allTrips, currentTravelerId, dateInput.value)) {
+    postMessage.classList.remove("hidden");
+    postMessage.innerText = "Please select another date to depart from.";
+  } else {
+    if (dropdown.value && duration.value && numberOfTravelers.value) {
+      const destinationId = allDestinations.find(destination => destination.destination === dropdown.value)
+      const tripObject = {
+        id: allTrips.length + 1,
+        userID: currentTravelerId,
+        destinationID: Number(destinationId.id),
+        travelers: numberOfTravelers.value,
+        date: dateInput.value.replaceAll("-", "/"),
+        duration: Number(duration.value),
+        status: "pending",
+        suggestedActivities: [],
+      };
+      postTrip(tripObject);
+      allTrips.push(tripObject);
+      allTripsForTraveler.push(tripObject);
+      pendingTripsData.push(tripObject);
+      tripsContainer.innerHTML = "";
+      displayTrips(allTripsForTraveler);
+    }
+  }
+}
+
+function postTrip(data) {
+  return fetch("http://localhost:3001/api/v1/trips", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => {
+      if (!res.ok || res.status >= 400) {
+        throw new Error();
+      }
+      return res.json();
+    })
+    .then((data) => {
+      postMessage.classList.remove("hidden");
+      postMessage.innerText =
+        "Success! Your trip has been requested and is pending. You'll hear back from an agent shortly!";
+    })
+    .catch((err) => {
+      postMessage.classList.remove("hidden");
+      postMessage.innerText =
+        "This is embarrasing. We've run into an error. Please try again later.";
+    });
+}
+
+function preverDuplicates(data, userID, date) {
+  data.find((trip) => {
+    return trip.date === date && trip.userID === userID;
+  });
 }
