@@ -224,7 +224,10 @@ function postTrip(data) {
           upcomingTripsData = tripRepository.findUpcomingTrips(currentTravelerId);
           pendingTripsData = tripRepository.filterTripsByStatus("pending", currentTravelerId);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          errorMessage.classList.remove("hidden");
+          errorMessage.innerText = "This is embarrasing. We've run into an error. Please try again later."
+        });
     })
     .catch((err) => {
       postMessage.classList.remove("hidden");
