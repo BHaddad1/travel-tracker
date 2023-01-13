@@ -17,13 +17,13 @@
           <h1 class="login-title">Login</h1>
           <section class="username-section">
             <label class="username" for="username">Username</label>
-            <input type="text" class="login-input" id="username" autofocus required placeholder="Username"/>
+            <input type="text" class="login-input" id="username" autofocus aria-describedby="login-error" aria-label="username" required placeholder="Username"/>
           </section>
           <section class="password-section">
             <label class="password" for="password">Password</label>
-            <input type="text" class="login-input" id="password" required placeholder="Password"/>
+            <input type="text" class="login-input" id="password" aria-describedby="login-error" aria-label="password" required placeholder="Password"/>
           </section>
-          <h2 class="username-error hidden" id="login-error">Incorrect username & password combination</h2>
+          <h2 class="username-error hidden" id="login-error" aria-errormessage="login-error-message" aria-invalid="false">Incorrect username & password combination</h2>
           <button class="login-button button" type="button" id="login-button">Login</button>
         </form>
       </section>
@@ -36,17 +36,17 @@
         <section class="todays-date">
           <h2>Today is December 31, 2021</h2>
         </section>
-        <form class="trip-search-form">
+        <form class="trip-search-form" role="search">
           <label for="destinations" class="hidden">Destinations</label>
-          <select class="destination" type="text" name="destinations" id="destinations" autofocus required>
+          <select class="destination" type="text" name="destinations" role="menu" id="destinations" autofocus required>
             <option class="destinations" name="destinations">Destinations</option>
           </select>
           <label for="travelers" class="travelers hidden">Number of Travelers</label>
-          <input id="travelers" class="travelers" type="number" placeholder="No. of Travelers" required minlength="1" min="1"/>
+          <input id="travelers" class="travelers" type="number" placeholder="No. of Travelers" aria-label="Number of Travelers" required minlength="1" min="1"/>
           <label class="first-day" for="date-input">Leaving on:</label>
-          <input class="date-input" id="date-input" type="date" value="yyyy-MM-dd" placeholder="date" required/>
+          <input class="date-input" id="date-input" type="date" value="yyyy-MM-dd" aria-label="Leaving on" placeholder="date" required/>
           <label class="duration hidden" for="duration-input" id="duration">Duration</label>
-          <input for="duration" class="duration-input" id="duration-input" required min="1" minlength="1" placeholder="Duration of Stay">
+          <input for="duration" class="duration-input" id="duration-input" type="number" required min="1" minlength="1" aria-label="Duration" placeholder="Duration of Stay">
           <h3 class="new-trip-total hidden" id="total-trip-cost">Total for Requested Trip</h3>
           <p type="button" name="button" class="hidden" id="trip-requested-message"></p>
         </form>
