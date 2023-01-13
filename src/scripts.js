@@ -39,6 +39,7 @@ const numberOfTravelers = document.getElementById("travelers");
 const postMessage = document.getElementById("trip-requested-message");
 const dateInput = document.getElementById("date-input");
 const requestTripButton = document.getElementById("request-trip");
+const logoutButton = document.getElementById("logout-button");
 
 loginButton.addEventListener("click", () => {
   logInTraveler();
@@ -64,6 +65,7 @@ pendingTripsButton.addEventListener("click", () => {
 });
 totalCostButton.addEventListener("click", displayCost);
 requestTripButton.addEventListener("click", createPost);
+logoutButton.addEventListener("click", logoutTraveler);
 
 const getData = (url) => {
   return fetch(url).then((res) => {
@@ -119,6 +121,7 @@ function logInTraveler() {
     pendingTripsData = tripRepository.filterTripsByStatus("pending", currentTravelerId);
     loginSection.classList.add("hidden");
     travelerPage.classList.remove("hidden");
+    loginForm.reset();
   } else if (traveler !== "traveler" || password.value !== "travel") {
     loginForm.reset();
     loginErrorMessage.classList.remove("hidden");
@@ -247,4 +250,9 @@ function preventDuplicates(data, userID, date) {
   data.find((trip) => {
     return trip.date === date && trip.userID === userID;
   });
+}
+
+function logoutTraveler() {
+  loginSection.classList.remove("hidden");
+  travelerPage.classList.add("hidden");
 }
