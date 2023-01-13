@@ -73,8 +73,7 @@ const getData = (url) => {
         throw new Error();
       }
       return res.json();
-    })
-    .catch((err) => console.log(err));
+    });
 };
 
 Promise.all([
@@ -157,7 +156,10 @@ function displayTrips(tripsData) {
 }
 
 function createDropdown() {
-  allDestinations.forEach((destination) => {
+  const allDestinationsSorted = allDestinations.sort((a, b) => {
+    return a.destination.localeCompare(b.destination);
+  })
+  allDestinationsSorted.forEach((destination) => {
     dropdown.innerHTML += `
     <option value="${destination.destination}">${destination.destination}</option>
     `;
