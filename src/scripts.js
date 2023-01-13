@@ -89,6 +89,7 @@ Promise.all([
     loginErrorMessage.classList.remove("hidden");
     loginErrorMessage.innerText =
       "Sorry, failed to load. Please try again later.";
+    loginButton.disabled = true;
   });
 
 function createClassInstances(data1, data2, data3) {
@@ -122,7 +123,7 @@ function logInTraveler() {
     loginForm.reset();
     loginErrorMessage.classList.remove("hidden");
     loginErrorMessage.setAttribute("aria-invalid", true);
-    loginErrorMessage.innerText = "Invalid username and password combination. Please try again with a valid ID.";
+    loginErrorMessage.innerText = "Invalid username and password combination.";
   } else if (Number(longerId) >= 51 && Number(evenLongerId) >= 51) {
     loginErrorMessage.classList.remove("hidden");
     loginErrorMessage.setAttribute("aria-invalid", true);
