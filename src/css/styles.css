@@ -47,11 +47,16 @@ body {
 }
 
 .all-trips-container {
+  align-items: flex-start;
+  align-content: space-between;
+  border: 2px solid;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   height: 113vh;
-  width: 97vw;
+  justify-content: space-around;
+  margin-left: 3%;
+  width: 95vw;
 }
 
 .search-button-container {
@@ -96,9 +101,8 @@ body {
 .trip-card-template {
   border: 2px solid;
   height: 50vh;
-  margin-left: 2%;
   margin-top: 2%;
-  width: 20vw
+  width: 20vw;
 }
 
 .travelers,
@@ -127,12 +131,6 @@ body {
 .trip-search-form {
   display: flex;
   flex-direction: column;
-  height: 19vh;
   justify-content: space-evenly;
   width: 16vw;
-}
-
-.total {
-  margin-left: 2%;
-  width: 95vw;
 }
