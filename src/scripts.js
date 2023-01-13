@@ -19,6 +19,7 @@ let pendingTripsData;
 
 const totalSection = document.getElementById("total");
 const tripsContainer = document.getElementById("trips-container");
+const loginForm = document.getElementById("login-form");
 const errorMessage = document.getElementById("error-message");
 const username = document.getElementById("username");
 const password = document.getElementById("password");
@@ -97,13 +98,9 @@ function createClassInstances(data1, data2, data3) {
 
 function logInTraveler() {
   const traveler = username.value.substr(0, 8);
-  const id = username.value.substr(8, 1);
-  if (
-    traveler === "traveler" &&
-    username.value.length > 8 &&
-    username.value.length < 11 &&
-    password.value === "travel"
-  ) {
+  const longerId = username.value.substr(8, 2);
+  const evenLongerId = username.value.substr(8, 3);
+  if (traveler === "traveler" && Number(longerId) < 51 && Number(evenLongerId) < 51 && password.value === "travel") {
     const allCharacters = username.value.split("");
     const id = allCharacters.filter((char) => {
       return Number(char);
@@ -118,27 +115,27 @@ function logInTraveler() {
     allTripsForTraveler = tripRepository.filterByTravelerID(currentTravelerId);
     pastTripsData = tripRepository.findPastTrips(currentTravelerId);
     upcomingTripsData = tripRepository.findUpcomingTrips(currentTravelerId);
-    pendingTripsData = tripRepository.filterTripsByStatus(
-      "pending",
-      currentTravelerId
-    );
+    pendingTripsData = tripRepository.filterTripsByStatus("pending", currentTravelerId);
     loginSection.classList.add("hidden");
     travelerPage.classList.remove("hidden");
-  } else if (
-    traveler !== "traveler" ||
-    id.length < 1 ||
-    password.value !== "travel"
-  ) {
+  } else if (traveler !== "traveler" || password.value !== "travel") {
+    loginForm.reset();
     loginErrorMessage.classList.remove("hidden");
     loginErrorMessage.setAttribute("aria-invalid", true);
-  }
-}
+    loginErrorMessage.innerText = "Invalid username and password combination. Please try again with a valid ID.";
+  } else if (Number(longerId) >= 51 && Number(evenLongerId) >= 51) {
+    loginErrorMessage.classList.remove("hidden");
+    loginErrorMessage.setAttribute("aria-invalid", true);
+    loginForm.reset();
+    loginErrorMessage.innerText = "Invalid username. Please try again with a valid ID.";
+  };
+};
+
+
 
 function displayTotalSpent() {
-  totalSection.innerText = `Total Spent on Trips This Year: $${tripRepository.calculateCostPerYear(
-    currentTravelerId
-  )}`;
-}
+  totalSection.innerText = `Total Spent on Trips This Year: $${tripRepository.calculateCostPerYear(currentTravelerId)}`;
+};
 
 function displayTrips(tripsData) {
   tripsData.forEach((trip) => {
@@ -177,15 +174,13 @@ function displayCost() {
 }
 
 function createPost() {
-  if (preverDuplicates(allTrips, currentTravelerId, dateInput.value)) {
+  if (preventDuplicates(allTrips, currentTravelerId, dateInput.value)) {
     postMessage.classList.remove("hidden");
     postMessage.innerText = "Please select another date to depart from.";
     return;
   } else {
     if (dropdown.value && duration.value && numberOfTravelers.value) {
-      const destinationId = allDestinations.find(
-        (destination) => destination.destination === dropdown.value
-      );
+      const destinationId = allDestinations.find(destination => destination.destination === dropdown.value);
       const tripObject = {
         id: allTrips.length + 1,
         userID: currentTravelerId,
@@ -247,7 +242,7 @@ function postTrip(data) {
     });
 }
 
-function preverDuplicates(data, userID, date) {
+function preventDuplicates(data, userID, date) {
   data.find((trip) => {
     return trip.date === date && trip.userID === userID;
   });
