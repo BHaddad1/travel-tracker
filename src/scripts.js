@@ -1,9 +1,7 @@
 import "./css/styles.css";
 import * as dayjs from "dayjs";
 import TravelerRepository from "../src/Traveler-Repository";
-import Traveler from "../src/Traveler";
 import TripRepository from "../src/Trip-Repository";
-import Trip from "../src/Trip";
 import "./images/turing-logo.png";
 import "./images/catTravel2.jpg";
 
@@ -145,7 +143,6 @@ function displayTotalSpent() {
 function displayTrips(tripsData) {
   tripsData.forEach((trip) => {
     const destination = tripRepository.findDestinationById(trip.destinationID);
-    console.log(destination);
     tripsContainer.innerHTML += `
       <section class="trip-card-template">
         <img class="card-image" alt="${destination.alt}" src="${destination.image}" />
