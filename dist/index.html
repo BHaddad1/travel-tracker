@@ -34,19 +34,19 @@
           <img src="./images/catTravel2.jpg" class="logo" alt="Cat icon with a plane through the head">
         </section>
         <section class="todays-date">
-          <h2>Today is December 31, 2021</h2>
+          <h2 class="date">Today is December 31, 2021</h2>
         </section>
         <form class="trip-search-form" role="search">
           <label for="destinations" class="hidden">Destinations</label>
           <select class="destination" type="text" name="destinations" role="menu" id="destinations" autofocus required>
-            <option class="destinations" name="destinations">Destinations</option>
+            <option class="form destinations" name="destinations">Destinations</option>
           </select>
           <label for="travelers" class="travelers hidden">Number of Travelers</label>
-          <input id="travelers" class="travelers" type="number" placeholder="Number of Travelers" aria-label="Number of Travelers" required minlength="1" min="1"/>
+          <input id="travelers" class="form travelers" type="number" placeholder="Number of Travelers" aria-label="Number of Travelers" required minlength="1" min="1"/>
           <label class="first-day" for="date-input">Leaving on:</label>
-          <input class="date-input" id="date-input" type="date" value="yyyy-MM-dd" aria-label="Leaving on" placeholder="date" required/>
+          <input class="form date-input" id="date-input" type="date" value="yyyy-MM-dd" aria-label="Leaving on" placeholder="date" required/>
           <label class="duration hidden" for="duration-input" id="duration">Duration</label>
-          <input for="duration" class="duration-input" id="duration-input" type="number" required min="1" minlength="1" aria-label="Duration" placeholder="Duration of Stay">
+          <input for="duration" class="form duration-input" id="duration-input" type="number" required min="1" minlength="1" aria-label="Duration" placeholder="Duration of Stay">
           <h3 class="new-trip-total hidden" id="total-trip-cost">Total for Requested Trip</h3>
           <p type="button" name="button" class="hidden" id="trip-requested-message"></p>
         </form>
@@ -58,15 +58,15 @@
           <button type="button" name="button" class="request-trip-button button" id="request-trip">Request Trip</button>
         </section>
         <section class="logout">
-          <button class="logout-button button" type="button">Log Out</button>
+          <button class="logout-button button" id="logout-button" type="button">Log Out</button>
         </section>
       </nav>
       <main class="main-container">
         <section class="button-container">
           <button type="button" name="button" class="trips-button button" id="all-trips">All Trips</button>
-          <button type="button" name="button" class="trips-button button" id="past-trips">Past Trips</button>
-          <button type="button" name="button" class="trips-button button" id="upcoming-trips">Upcoming Trips</button>
-          <button type="button" name="button" class="trips-button button" id="pending-trips">Pending Trips</button>
+          <button type="button" name="button" class="trips-button button" id="past-trips">Past</button>
+          <button type="button" name="button" class="trips-button button" id="upcoming-trips">Upcoming</button>
+          <button type="button" name="button" class="trips-button button" id="pending-trips">Pending</button>
         </section>
         <section class="all-trips-container" id="trips-container">
         </section>
