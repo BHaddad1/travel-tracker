@@ -157,7 +157,7 @@ function displayTrips(tripsData) {
       </section>
     `;
   });
-}
+};
 
 function createDropdown() {
   const allDestinationsSorted = allDestinations.sort((a, b) => {
