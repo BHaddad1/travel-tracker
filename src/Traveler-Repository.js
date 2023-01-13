@@ -3,7 +3,12 @@ class TravelerRepository {
     this.allTravelerData = allTravelerData;
   }
   findTravelerById(id) {
-    return this.allTravelerData.find(traveler => traveler.id === id);
+    const traveler = this.allTravelerData.find(traveler => traveler.id === id);
+    if (!traveler) {
+      return "No such user found."
+    }
+      return traveler;
+
   }
 };
 

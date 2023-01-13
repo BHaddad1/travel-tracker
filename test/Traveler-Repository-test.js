@@ -26,4 +26,7 @@ describe("Traveler Repository", () => {
     };
     expect(travelerRepository.findTravelerById(1)).to.deep.equal(a);
   });
+  it("should return a message if there is no such traveler found", () => {
+    expect(travelerRepository.findTravelerById(51)).to.equal("No such user found.");
+  });
 });
