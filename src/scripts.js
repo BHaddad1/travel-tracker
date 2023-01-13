@@ -40,12 +40,14 @@ const postMessage = document.getElementById("trip-requested-message");
 const dateInput = document.getElementById("date-input");
 const requestTripButton = document.getElementById("request-trip");
 const logoutButton = document.getElementById("logout-button");
+const nameSection = document.getElementById("name");
 
 loginButton.addEventListener("click", () => {
   logInTraveler();
   displayTotalSpent();
   displayTrips(allTripsForTraveler);
   createDropdown();
+  nameSection.innerText = `Welcome, ${currentTraveler.name}!`
 });
 upcomingTripsButton.addEventListener("click", () => {
   tripsContainer.innerHTML = "";
