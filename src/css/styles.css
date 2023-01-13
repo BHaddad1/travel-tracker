@@ -37,7 +37,7 @@ body {
   height: 25vh;
   justify-content: space-between;
   margin: 3%;
-  width: 95vw;
+  width: 93vw;
 }
 
 .logo {
@@ -50,19 +50,21 @@ body {
   align-items: flex-start;
   align-content: space-between;
   border: 2px solid;
+  border-radius: 15px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   height: 113vh;
   justify-content: space-around;
   margin-left: 3%;
-  width: 95vw;
+  overflow: scroll;
+  width: 93vw;
 }
 
 .search-button-container {
   display: flex;
   flex-direction: column;
-  height: 10vh;
+  height: 15vh;
   justify-content: space-between;
 }
 
@@ -100,7 +102,9 @@ body {
 
 .trip-card-template {
   border: 2px solid;
+  border-radius: 5px;
   height: 50vh;
+  margin-bottom: 2%;
   margin-top: 2%;
   width: 20vw;
 }
@@ -131,6 +135,12 @@ body {
 .trip-search-form {
   display: flex;
   flex-direction: column;
+  height: 23vh;
   justify-content: space-evenly;
   width: 16vw;
+}
+
+.new-trip-total,
+.trip-requested-message {
+  margin: 0;
 }

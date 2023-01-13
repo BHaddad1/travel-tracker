@@ -40,12 +40,14 @@ const postMessage = document.getElementById("trip-requested-message");
 const dateInput = document.getElementById("date-input");
 const requestTripButton = document.getElementById("request-trip");
 const logoutButton = document.getElementById("logout-button");
+const nameSection = document.getElementById("name");
 
 loginButton.addEventListener("click", () => {
   logInTraveler();
   displayTotalSpent();
   displayTrips(allTripsForTraveler);
   createDropdown();
+  nameSection.innerText = `Welcome, ${currentTraveler.name}!`
 });
 upcomingTripsButton.addEventListener("click", () => {
   tripsContainer.innerHTML = "";
@@ -157,7 +159,7 @@ function displayTrips(tripsData) {
       </section>
     `;
   });
-}
+};
 
 function createDropdown() {
   const allDestinationsSorted = allDestinations.sort((a, b) => {
@@ -198,9 +200,6 @@ function createPost() {
         suggestedActivities: [],
       };
       postTrip(tripObject);
-      tripsContainer.innerHTML = "";
-      displayTrips(allTripsForTraveler);
-      displayTrips(pendingTripsData);
     }
   }
 }
@@ -223,20 +222,23 @@ function postTrip(data) {
       postMessage.classList.remove("hidden");
       postMessage.innerText =
         "Success! Your trip has been requested and is pending. You'll hear back from an agent shortly!";
+      dropdown.value = "";
+      duration.value = "";
+      numberOfTravelers.value = "";
+      dateInput.value;
       return getData("http://localhost:3001/api/v1/trips")
         .then((data) => {
           tripRepository = new TripRepository(data.trips, allDestinations);
-          allTripsForTraveler =
-            tripRepository.filterByTravelerID(currentTravelerId);
+          allTripsForTraveler = tripRepository.filterByTravelerID(currentTravelerId);
           pastTripsData = tripRepository.findPastTrips(currentTravelerId);
-          upcomingTripsData =
-            tripRepository.findUpcomingTrips(currentTravelerId);
+          upcomingTripsData = tripRepository.findUpcomingTrips(currentTravelerId);
           pendingTripsData = tripRepository.filterTripsByStatus("pending", currentTravelerId);
+          tripsContainer.innerHTML = "";
+          displayTrips(allTripsForTraveler);
         })
         .catch((err) => {
           errorMessage.classList.remove("hidden");
-          errorMessage.innerText =
-            "This is embarrasing. We've run into an error. Please try again later.";
+          errorMessage.innerText = "This is embarrasing. We've run into an error. Please try again later.";
         });
     })
     .catch((err) => {
