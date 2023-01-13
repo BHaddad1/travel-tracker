@@ -62,7 +62,7 @@ body {
 .search-button-container {
   display: flex;
   flex-direction: column;
-  height: 10vh;
+  height: 15vh;
   justify-content: space-between;
 }
 
@@ -131,6 +131,7 @@ body {
 .trip-search-form {
   display: flex;
   flex-direction: column;
+  height: 23vh;
   justify-content: space-evenly;
   width: 16vw;
 }
