@@ -100,6 +100,7 @@ function createClassInstances(data1, data2, data3) {
 
 function logInTraveler() {
   const traveler = username.value.substr(0, 8);
+  const id = username.value.substr(8, 1);
   if (
     traveler === "traveler" &&
     username.value.length > 8 &&
@@ -126,8 +127,9 @@ function logInTraveler() {
     );
     loginSection.classList.add("hidden");
     travelerPage.classList.remove("hidden");
-  } else if (traveler !== "traveler" || password.value !== "travel") {
+  } else if (traveler !== "traveler" || id.length < 1 || password.value !== "travel") {
     loginErrorMessage.classList.remove("hidden");
+    loginErrorMessage.setAttribute("aria-invalid", true);
   }
 }
 
@@ -219,14 +221,20 @@ function postTrip(data) {
       return getData("http://localhost:3001/api/v1/trips")
         .then((data) => {
           tripRepository = new TripRepository(data.trips, allDestinations);
-          allTripsForTraveler = tripRepository.filterByTravelerID(currentTravelerId);
+          allTripsForTraveler =
+            tripRepository.filterByTravelerID(currentTravelerId);
           pastTripsData = tripRepository.findPastTrips(currentTravelerId);
-          upcomingTripsData = tripRepository.findUpcomingTrips(currentTravelerId);
-          pendingTripsData = tripRepository.filterTripsByStatus("pending", currentTravelerId);
+          upcomingTripsData =
+            tripRepository.findUpcomingTrips(currentTravelerId);
+          pendingTripsData = tripRepository.filterTripsByStatus(
+            "pending",
+            currentTravelerId
+          );
         })
         .catch((err) => {
           errorMessage.classList.remove("hidden");
-          errorMessage.innerText = "This is embarrasing. We've run into an error. Please try again later."
+          errorMessage.innerText =
+            "This is embarrasing. We've run into an error. Please try again later.";
         });
     })
     .catch((err) => {

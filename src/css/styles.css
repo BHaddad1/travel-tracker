@@ -35,9 +35,9 @@ body {
   font-size: 1.2em;
 }
 
-.hidden {
+/* .hidden {
   display: none;
-}
+} */
 
 .search-container {
   align-items: flex-start;
