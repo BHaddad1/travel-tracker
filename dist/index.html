@@ -23,7 +23,7 @@
             <label class="password" for="password">Password</label>
             <input type="text" class="login-input" id="password" required placeholder="Password"/>
           </section>
-          <p class="username-error hidden" id="login-error">Incorrect username & password combination</p>
+          <h2 class="username-error hidden" id="login-error">Incorrect username & password combination</h2>
           <button class="login-button button" type="button" id="login-button">Login</button>
         </form>
       </section>
@@ -43,15 +43,15 @@
           </select>
           <label for="travelers" class="travelers hidden">Number of Travelers</label>
           <input id="travelers" class="travelers" type="number" placeholder="No. of Travelers" required minlength="1" min="1"/>
-          <label class="first-day">Leaving on:</label>
+          <label class="first-day" for="date-input">Leaving on:</label>
           <input class="date-input" id="date-input" type="date" value="yyyy-MM-dd" placeholder="date" required/>
-          <label class="duration hidden" id="duration">Duration</label>
+          <label class="duration hidden" for="duration-input" id="duration">Duration</label>
           <input for="duration" class="duration-input" id="duration-input" required min="1" minlength="1" placeholder="Duration of Stay">
           <h3 class="new-trip-total hidden" id="total-trip-cost">Total for Requested Trip</h3>
           <p type="button" name="button" class="hidden" id="trip-requested-message"></p>
         </form>
         <section class="error-handling hidden" id="error-message">
-          <h2></h2>
+          <h2 class="hidden">Error</h2>
         </section>
         <section class="search-button-container">
           <button type="button" name="button" class="trip-cost-button button" id="total-cost">Get Total Cost</button>
