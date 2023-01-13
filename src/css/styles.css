@@ -12,15 +12,6 @@ body {
   justify-content: center;
 }
 
-.login-button {
-  background-color: #ff385c;
-  border: none;
-  border-radius: 5px;
-  height: 4vh;
-  margin-top: 5%;
-  width: 7vw;
-}
-
 .login-input {
   height: 5vh;
 }
@@ -43,13 +34,14 @@ body {
   align-items: flex-start;
   display: flex;
   flex-direction: row;
-  height: 30vh;
+  height: 25vh;
   justify-content: space-between;
-  margin-top: 3%;
-  width: 100vw;
+  margin: 3%;
+  width: 95vw;
 }
 
 .logo {
+  border-radius: 15px;
   height: 20vh;
   width: 10vw;
 }
@@ -58,8 +50,8 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 60vh;
-  width: 100vw;
+  height: 113vh;
+  width: 97vw;
 }
 
 .search-button-container {
@@ -73,7 +65,8 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 50vw;
+  margin: 3%;
+  width: 60vw;
 }
 
 .trips-button,
@@ -91,14 +84,55 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
   font-weight: 300;
+  margin: 5px;
+  width: 13vw;
 }
 
 .card-image {
-  height: 15vh;
-  width: 10vw;
+  height: 20vh;
+  width: 20vw;
 }
 
 .trip-card-template {
-  height: 15vh;
+  border: 2px solid;
+  height: 50vh;
+  margin-left: 2%;
+  margin-top: 2%;
+  width: 20vw
+}
+
+.travelers,
+.duration-input {
+  width: 8vw;
+}
+
+.login-button {
+  background-color: #ff385c;
+  border: none;
+  border-radius: 5px;
+  height: 4vh;
+  margin-top: 5%;
+  width: 5vw;
+}
+
+.date {
   width: 10vw;
+}
+
+.trip {
+  margin-left: 2%;
+  width: 19vw;
+}
+
+.trip-search-form {
+  display: flex;
+  flex-direction: column;
+  height: 19vh;
+  justify-content: space-evenly;
+  width: 16vw;
+}
+
+.total {
+  margin-left: 2%;
+  width: 95vw;
 }
