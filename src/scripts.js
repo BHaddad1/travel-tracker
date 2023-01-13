@@ -121,6 +121,8 @@ function logInTraveler() {
     pendingTripsData = tripRepository.filterTripsByStatus("pending", currentTravelerId);
     loginSection.classList.add("hidden");
     travelerPage.classList.remove("hidden");
+    postMessage.classList.remove("hidden");
+    postMessage.innerText = "Please fill out ALL inputs before requesting a trip."
     loginForm.reset();
   } else if (traveler !== "traveler" || password.value !== "travel") {
     loginForm.reset();
@@ -198,6 +200,7 @@ function createPost() {
       postTrip(tripObject);
       tripsContainer.innerHTML = "";
       displayTrips(allTripsForTraveler);
+      displayTrips(pendingTripsData);
     }
   }
 }
@@ -228,10 +231,7 @@ function postTrip(data) {
           pastTripsData = tripRepository.findPastTrips(currentTravelerId);
           upcomingTripsData =
             tripRepository.findUpcomingTrips(currentTravelerId);
-          pendingTripsData = tripRepository.filterTripsByStatus(
-            "pending",
-            currentTravelerId
-          );
+          pendingTripsData = tripRepository.filterTripsByStatus("pending", currentTravelerId);
         })
         .catch((err) => {
           errorMessage.classList.remove("hidden");
