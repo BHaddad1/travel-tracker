@@ -67,13 +67,12 @@ totalCostButton.addEventListener("click", displayCost);
 requestTripButton.addEventListener("click", createPost);
 
 const getData = (url) => {
-  return fetch(url)
-    .then((res) => {
-      if (res.status >= 400) {
-        throw new Error();
-      }
-      return res.json();
-    });
+  return fetch(url).then((res) => {
+    if (res.status >= 400) {
+      throw new Error();
+    }
+    return res.json();
+  });
 };
 
 Promise.all([
@@ -88,8 +87,9 @@ Promise.all([
     createClassInstances(allTravelers, allTrips, allDestinations);
   })
   .catch((err) => {
-    errorMessage.classList.remove("hidden");
-    errorMessage.innerText = "Sorry, failed to load. Please try again later.";
+    loginErrorMessage.classList.remove("hidden");
+    loginErrorMessage.innerText =
+      "Sorry, failed to load. Please try again later.";
   });
 
 function createClassInstances(data1, data2, data3) {
@@ -126,7 +126,11 @@ function logInTraveler() {
     );
     loginSection.classList.add("hidden");
     travelerPage.classList.remove("hidden");
-  } else if (traveler !== "traveler" || id.length < 1 || password.value !== "travel") {
+  } else if (
+    traveler !== "traveler" ||
+    id.length < 1 ||
+    password.value !== "travel"
+  ) {
     loginErrorMessage.classList.remove("hidden");
     loginErrorMessage.setAttribute("aria-invalid", true);
   }
@@ -158,7 +162,7 @@ function displayTrips(tripsData) {
 function createDropdown() {
   const allDestinationsSorted = allDestinations.sort((a, b) => {
     return a.destination.localeCompare(b.destination);
-  })
+  });
   allDestinationsSorted.forEach((destination) => {
     dropdown.innerHTML += `
     <option value="${destination.destination}">${destination.destination}</option>
