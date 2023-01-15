@@ -106,15 +106,7 @@ function logInTraveler() {
   const longerId = username.value.substr(8, 2);
   const evenLongerId = username.value.substr(8, 3);
   if (traveler === "traveler" && Number(longerId) < 51 && Number(evenLongerId) < 51 && password.value === "travel") {
-    const allCharacters = username.value.split("");
-    const id = allCharacters.filter((char) => {
-      return Number(char);
-    });
-    if (allCharacters[9] === 0) {
-      id.push("0");
-    }
-    const joinedId = id.join("");
-    const number = Number(joinedId);
+    const number = Number(longerId);
     currentTraveler = travelerRepository.findTravelerById(number);
     currentTravelerId = currentTraveler.id;
     allTripsForTraveler = tripRepository.filterByTravelerID(currentTravelerId);
@@ -138,8 +130,6 @@ function logInTraveler() {
     loginErrorMessage.innerText = "Invalid username. Please try again with a valid ID.";
   };
 };
-
-
 
 function displayTotalSpent() {
   totalSection.innerText = `Total Spent on Trips This Year: $${tripRepository.calculateCostPerYear(currentTravelerId)}`;
@@ -194,7 +184,7 @@ function createPost() {
         userID: currentTravelerId,
         destinationID: Number(destinationId.id),
         travelers: numberOfTravelers.value,
-        date: dateInput.value.replaceAll("-", "/"),
+        date: dayjs(dateInput.value).format("YYYY/MM/DD"),
         duration: Number(duration.value),
         status: "pending",
         suggestedActivities: [],
@@ -225,7 +215,7 @@ function postTrip(data) {
       dropdown.value = "";
       duration.value = "";
       numberOfTravelers.value = "";
-      dateInput.value;
+      dateInput.value = "";
       return getData("http://localhost:3001/api/v1/trips")
         .then((data) => {
           tripRepository = new TripRepository(data.trips, allDestinations);
