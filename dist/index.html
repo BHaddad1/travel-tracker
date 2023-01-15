@@ -48,12 +48,12 @@
         <form class="trip-search-form" role="search">
           <label for="destinations" class="hidden">Destinations</label>
           <select class="form destination" type="text" name="destinations" role="menu" id="destinations" autofocus required>
-            <option class="form destinations" name="destinations">Destinations</option>
+            <option class="form destinations" name="destinations">Select a Destination</option>
           </select>
           <label for="travelers" class="travelers hidden">Number of Travelers</label>
           <input id="travelers" class="form travelers" type="number" placeholder="Number of Travelers" aria-label="Number of Travelers" required minlength="1" min="1"/>
           <label class="first-day" for="date-input">Leaving on:</label>
-          <input class="form date-input" id="date-input" type="date" value="yyyy-MM-dd" aria-label="Leaving on" placeholder="date" required/>
+          <input class="form date-input" id="date-input" type="date" value="yyyy-MM-dd" aria-label="Leaving on" placeholder="date" required min="2021-12-31""/>
           <label class="duration hidden" for="duration-input" id="duration">Duration</label>
           <input for="duration" class="form duration-input" id="duration-input" type="number" required min="1" minlength="1" aria-label="Duration" placeholder="Duration of Stay">
           <h3 class="new-trip-total hidden" id="total-trip-cost">Total for Requested Trip</h3>
