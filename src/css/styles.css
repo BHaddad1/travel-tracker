@@ -8,7 +8,7 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 60vh;
+  height: 80vh;
   justify-content: center;
 }
 
@@ -146,14 +146,14 @@ body {
   border: 2px solid;
   display: flex;
   flex-direction: column;
-  height: 23vh;
+  height: 26vh;
   justify-content: space-evenly;
   padding: 1%;
   width: 16vw;
 }
 
-.new-trip-total,
-.trip-requested-message {
+h3,
+p {
   margin: 0;
 }
 
