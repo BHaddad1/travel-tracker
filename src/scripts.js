@@ -258,3 +258,5 @@ function logoutTraveler() {
   loginSection.classList.remove("hidden");
   travelerPage.classList.add("hidden");
 }
+
+// dayjs(dateInput.value).format("YYYY/MM/DD")
