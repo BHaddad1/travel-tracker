@@ -74,6 +74,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   margin: 3%;
+  margin-top: 7%;
   width: 60vw;
 }
 
