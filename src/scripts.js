@@ -16,6 +16,7 @@ let allTripsForTraveler;
 let pastTripsData;
 let upcomingTripsData;
 let pendingTripsData;
+let totalForNewTrip = 0;
 
 const totalSection = document.getElementById("total");
 const tripsContainer = document.getElementById("trips-container");
@@ -99,23 +100,14 @@ Promise.all([
 function createClassInstances(data1, data2, data3) {
   travelerRepository = new TravelerRepository(data1);
   tripRepository = new TripRepository(data2, data3);
-}
+};
 
 function logInTraveler() {
   const traveler = username.value.substr(0, 8);
   const longerId = username.value.substr(8, 2);
   const evenLongerId = username.value.substr(8, 3);
   if (traveler === "traveler" && Number(longerId) < 51 && Number(evenLongerId) < 51 && password.value === "travel") {
-    const allCharacters = username.value.split("");
-    const id = allCharacters.filter((char) => {
-      return Number(char);
-    });
-    if (allCharacters[9] === 0) {
-      id.push("0");
-    }
-    const joinedId = id.join("");
-    const number = Number(joinedId);
-    currentTraveler = travelerRepository.findTravelerById(number);
+    currentTraveler = travelerRepository.findTravelerById(Number(longerId));
     currentTravelerId = currentTraveler.id;
     allTripsForTraveler = tripRepository.filterByTravelerID(currentTravelerId);
     pastTripsData = tripRepository.findPastTrips(currentTravelerId);
@@ -126,6 +118,7 @@ function logInTraveler() {
     postMessage.classList.remove("hidden");
     postMessage.innerText = "Please fill out ALL inputs before requesting a trip."
     loginForm.reset();
+    loginErrorMessage.classList.add("hidden");
   } else if (traveler !== "traveler" || password.value !== "travel") {
     loginForm.reset();
     loginErrorMessage.classList.remove("hidden");
@@ -139,13 +132,14 @@ function logInTraveler() {
   };
 };
 
-
-
 function displayTotalSpent() {
-  totalSection.innerText = `Total Spent on Trips This Year: $${tripRepository.calculateCostPerYear(currentTravelerId)}`;
+  const total = tripRepository.calculateCostPerYear(currentTravelerId)
+  const newTotal = total + totalForNewTrip
+  totalSection.innerText = `Total Spent on Trips This Year: $${newTotal}`;
 };
 
 function displayTrips(tripsData) {
+  tripsContainer.innerHTML = "";
   tripsData.forEach((trip) => {
     const destination = tripRepository.findDestinationById(trip.destinationID);
     tripsContainer.innerHTML += `
@@ -162,24 +156,27 @@ function displayTrips(tripsData) {
 };
 
 function createDropdown() {
-  const allDestinationsSorted = allDestinations.sort((a, b) => {
+  allDestinations
+  .sort((a, b) => {
     return a.destination.localeCompare(b.destination);
-  });
-  allDestinationsSorted.forEach((destination) => {
+  })
+  .forEach((destination) => {
     dropdown.innerHTML += `
     <option value="${destination.destination}">${destination.destination}</option>
     `;
   });
-}
+};
 
 function displayCost() {
   const destination = tripRepository.findDestinationByName(dropdown.value);
   const total =
     destination.estimatedLodgingCostPerDay * duration.value +
     destination.estimatedFlightCostPerPerson * numberOfTravelers.value;
+    postMessage.classList.add("hidden");
   totalCostSection.classList.remove("hidden");
   totalCostSection.innerText = `$${total} for this new trip`;
-}
+  totalForNewTrip += total;
+};
 
 function createPost() {
   if (preventDuplicates(allTrips, currentTravelerId, dateInput.value)) {
@@ -194,15 +191,16 @@ function createPost() {
         userID: currentTravelerId,
         destinationID: Number(destinationId.id),
         travelers: numberOfTravelers.value,
-        date: dateInput.value.replaceAll("-", "/"),
+        date: dayjs(dateInput.value).format("YYYY/MM/DD"),
         duration: Number(duration.value),
         status: "pending",
         suggestedActivities: [],
       };
       postTrip(tripObject);
+      displayTotalSpent();
     }
   }
-}
+};
 
 function postTrip(data) {
   return fetch("http://localhost:3001/api/v1/trips", {
@@ -219,13 +217,14 @@ function postTrip(data) {
       return res.json();
     })
     .then((data) => {
+      totalCostSection.classList.add("hidden");
       postMessage.classList.remove("hidden");
       postMessage.innerText =
         "Success! Your trip has been requested and is pending. You'll hear back from an agent shortly!";
       dropdown.value = "";
       duration.value = "";
       numberOfTravelers.value = "";
-      dateInput.value;
+      dateInput.value = "";
       return getData("http://localhost:3001/api/v1/trips")
         .then((data) => {
           tripRepository = new TripRepository(data.trips, allDestinations);
@@ -243,18 +242,17 @@ function postTrip(data) {
     })
     .catch((err) => {
       postMessage.classList.remove("hidden");
-      postMessage.innerText =
-        "This is embarrasing. We've run into an error. Please try again later.";
+      postMessage.innerText = "This is embarrasing. We've run into an error. Please try again later.";
     });
-}
+};
 
 function preventDuplicates(data, userID, date) {
   data.find((trip) => {
     return trip.date === date && trip.userID === userID;
   });
-}
+};
 
 function logoutTraveler() {
   loginSection.classList.remove("hidden");
   travelerPage.classList.add("hidden");
-}
+};
