@@ -189,7 +189,7 @@ function displayTripCost() {
 };
 
 function createPost() {
-  if (preventDuplicates(allTrips, currentTravelerId, dateInput.value)) {
+  if (preventDuplicates(allTrips, currentTravelerId, dayjs(dateInput.value).format("YYYY/MM/DD"))) {
     postMessage.classList.remove("hidden");
     postMessage.innerText = "Please select another date to depart from.";
     return;
@@ -260,7 +260,7 @@ function postTrip(data) {
 };
 
 function preventDuplicates(data, userID, date) {
-  data.find((trip) => {
+ return data.find((trip) => {
     return trip.date === date && trip.userID === userID;
   });
 };
