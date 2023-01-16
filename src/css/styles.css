@@ -65,7 +65,7 @@ body {
 .search-button-container {
   display: flex;
   flex-direction: column;
-  height: 20vh;
+  height: 24vh;
   justify-content: space-between;
 }
 
@@ -95,6 +95,7 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
   font-weight: 300;
+  height: 6vh;
   margin: 5px;
   width: 13vw;
 }
@@ -133,13 +134,16 @@ body {
   width: 5vw;
 }
 
-.date {
+.date,
+.total {
+  font-size: 25px;
   margin-bottom: 10%;
   margin-top: 10%;
   width: 22vw;
 }
 
 .trip {
+  font-size: 16px;
   font-weight: bolder;
   margin-bottom: 0;
   margin-left: 8%;
@@ -156,7 +160,7 @@ body {
   border: 2px solid;
   display: flex;
   flex-direction: column;
-  height: 26vh;
+  height: 30vh;
   justify-content: space-evenly;
   padding: 1%;
   width: 16vw;
@@ -193,5 +197,12 @@ h2 {
 
 .welcome {
   color: #ff385c;
-  font-weight: 400;
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+.trip-requested-message,
+.form,
+.first-day {
+  margin-top: 3%;
 }
