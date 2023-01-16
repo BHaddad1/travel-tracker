@@ -62,7 +62,7 @@ pastTripsButton.addEventListener("click", () => {
 pendingTripsButton.addEventListener("click", () => {
   displayTrips(pendingTripsData);
 });
-tripCostButton.addEventListener("click", displayCost);
+tripCostButton.addEventListener("click", displayTripCost);
 requestTripButton.addEventListener("click", createPost);
 logoutButton.addEventListener("click", logoutTraveler);
 
@@ -162,7 +162,7 @@ function createDropdown() {
   });
 };
 
-function displayCost() {
+function displayTripCost() {
   const destination = tripRepository.findDestinationByName(dropdown.value);
   const total =
     destination.estimatedLodgingCostPerDay * duration.value +
