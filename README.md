@@ -26,3 +26,7 @@ Welcome to CatTravel! This is a travel tracker app for managing and tracking dif
 Some challenges included working with double data sets in the Trip Repository class method CalculcuateCostPerYear.
 
 Some wins included debugging quickly, and deleting unused classes when it became clear they were redundant. 
+
+## Contact
+Blanche Haddad (they/them)
+[LinkedIn](https://www.linkedin.com/in/blanche-haddad-denver/)
