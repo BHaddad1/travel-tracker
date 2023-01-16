@@ -19,7 +19,7 @@ Welcome to CatTravel! This is a travel tracker app for managing and tracking dif
 
 ## Preview
 
-[gif](./src/images/CatTravel.gif)
+![gif](./src/images/CatTravel.gif)
 
 ## Wins and Challenges
 
