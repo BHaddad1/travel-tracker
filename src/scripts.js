@@ -2,7 +2,6 @@ import "./css/styles.css";
 import * as dayjs from "dayjs";
 import TravelerRepository from "../src/Traveler-Repository";
 import TripRepository from "../src/Trip-Repository";
-import "./images/turing-logo.png";
 import "./images/catTravel2.jpg";
 
 let allTrips;
@@ -48,6 +47,8 @@ loginButton.addEventListener("click", () => {
   displayTotalSpent();
   displayTrips(allTripsForTraveler);
   createDropdown();
+  tripCostButton.disabled = true;
+  requestTripButton.disabled = true;
   nameSection.innerText = `Welcome, ${currentTraveler.name}!`
 });
 upcomingTripsButton.addEventListener("click", () => {
@@ -62,8 +63,18 @@ pastTripsButton.addEventListener("click", () => {
 pendingTripsButton.addEventListener("click", () => {
   displayTrips(pendingTripsData);
 });
-tripCostButton.addEventListener("click", displayTripCost);
-requestTripButton.addEventListener("click", createPost);
+duration.addEventListener("keyup", () => {
+  tripCostButton.disabled = false;
+  requestTripButton.disabled = false;
+})
+tripCostButton.addEventListener("click",() => {
+  displayTripCost();
+  tripCostButton.disabled = true;
+});
+requestTripButton.addEventListener("click", () => {
+  createPost();
+  requestTripButton.disabled = true;
+});
 logoutButton.addEventListener("click", logoutTraveler);
 
 const getData = (url) => {
@@ -130,7 +141,8 @@ function logInTraveler() {
 function displayTotalSpent() {
   const total = tripRepository.calculateCostPerYear(currentTravelerId);
   const newTotal = total + totalForNewTrip;
-  totalSection.innerText = `Total Spent on Trips This Year: $${newTotal}`;
+  const formattedTotal = newTotal.toLocaleString("en-US");
+  totalSection.innerText = `Total Spent on Trips This Year: $${formattedTotal}`;
 };
 
 function displayTrips(tripsData) {
@@ -140,11 +152,13 @@ function displayTrips(tripsData) {
     tripsContainer.innerHTML += `
       <section class="trip-card-template">
         <img class="card-image" alt="${destination.alt}" src="${destination.image}" />
-        <p class="trip trip-name">Going To: ${destination.destination}</p>
-        <p class="trip date">Leaving On: ${trip.date}</p>
-        <p class="trip number-of-travelers">${trip.travelers} Travelers</p>
-        <p class="trip duration">${trip.duration} Days</p>
-        <p class="trip status">Status: ${trip.status}</p>
+        <section class="trip-details-container">
+          <p class="trip trip-name">Going To: ${destination.destination}</p>
+          <p class="trip date">Leaving On: ${trip.date}</p>
+          <p class="trip number-of-travelers">${trip.travelers} Travelers</p>
+          <p class="trip duration">${trip.duration} Days</p>
+          <p class="trip status">Status: ${trip.status}</p>
+        </section>
       </section>
     `;
   });
@@ -167,9 +181,10 @@ function displayTripCost() {
   const total =
     destination.estimatedLodgingCostPerDay * duration.value +
     destination.estimatedFlightCostPerPerson * numberOfTravelers.value;
+  const formattedTotal = total.toLocaleString("en-US");
   postMessage.classList.add("hidden");
   totalCostSection.classList.remove("hidden");
-  totalCostSection.innerText = `$${total} for this new trip`;
+  totalCostSection.innerText = `$${formattedTotal} for this new trip`;
   totalForNewTrip += total;
 };
 
@@ -220,6 +235,9 @@ function postTrip(data) {
       duration.value = "";
       numberOfTravelers.value = "";
       dateInput.value = "";
+      setTimeout(() => {
+        postMessage.innerText = "Please fill out ALL inputs before requesting a trip."
+      }, 3000);
       return getData("http://localhost:3001/api/v1/trips")
         .then((data) => {
           tripRepository = new TripRepository(data.trips, allDestinations);
