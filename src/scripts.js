@@ -33,7 +33,7 @@ const allTripsButton = document.getElementById("all-trips");
 const pastTripsButton = document.getElementById("past-trips");
 const pendingTripsButton = document.getElementById("pending-trips");
 const dropdown = document.getElementById("destinations");
-const totalCostButton = document.getElementById("total-cost");
+const tripCostButton = document.getElementById("total-cost");
 const totalCostSection = document.getElementById("total-trip-cost");
 const duration = document.getElementById("duration-input");
 const numberOfTravelers = document.getElementById("travelers");
@@ -51,22 +51,18 @@ loginButton.addEventListener("click", () => {
   nameSection.innerText = `Welcome, ${currentTraveler.name}!`
 });
 upcomingTripsButton.addEventListener("click", () => {
-  tripsContainer.innerHTML = "";
   displayTrips(upcomingTripsData);
 });
 allTripsButton.addEventListener("click", () => {
-  tripsContainer.innerHTML = "";
   displayTrips(allTripsForTraveler);
 });
 pastTripsButton.addEventListener("click", () => {
-  tripsContainer.innerHTML = "";
   displayTrips(pastTripsData);
 });
 pendingTripsButton.addEventListener("click", () => {
-  tripsContainer.innerHTML = "";
   displayTrips(pendingTripsData);
 });
-totalCostButton.addEventListener("click", displayCost);
+tripCostButton.addEventListener("click", displayCost);
 requestTripButton.addEventListener("click", createPost);
 logoutButton.addEventListener("click", logoutTraveler);
 
@@ -92,8 +88,7 @@ Promise.all([
   })
   .catch((err) => {
     loginErrorMessage.classList.remove("hidden");
-    loginErrorMessage.innerText =
-      "Sorry, failed to load. Please try again later.";
+    loginErrorMessage.innerText = "Sorry, failed to load. Please try again later.";
     loginButton.disabled = true;
   });
 
@@ -117,24 +112,24 @@ function logInTraveler() {
     travelerPage.classList.remove("hidden");
     postMessage.classList.remove("hidden");
     postMessage.innerText = "Please fill out ALL inputs before requesting a trip."
-    loginForm.reset();
     loginErrorMessage.classList.add("hidden");
-  } else if (traveler !== "traveler" || password.value !== "travel") {
     loginForm.reset();
+  } else if (traveler !== "traveler" || password.value !== "travel") {
     loginErrorMessage.classList.remove("hidden");
     loginErrorMessage.setAttribute("aria-invalid", true);
     loginErrorMessage.innerText = "Invalid username and password combination.";
+    loginForm.reset();
   } else if (Number(longerId) >= 51 && Number(evenLongerId) >= 51) {
     loginErrorMessage.classList.remove("hidden");
     loginErrorMessage.setAttribute("aria-invalid", true);
-    loginForm.reset();
     loginErrorMessage.innerText = "Invalid username. Please try again with a valid ID.";
+    loginForm.reset();
   };
 };
 
 function displayTotalSpent() {
-  const total = tripRepository.calculateCostPerYear(currentTravelerId)
-  const newTotal = total + totalForNewTrip
+  const total = tripRepository.calculateCostPerYear(currentTravelerId);
+  const newTotal = total + totalForNewTrip;
   totalSection.innerText = `Total Spent on Trips This Year: $${newTotal}`;
 };
 
@@ -172,7 +167,7 @@ function displayCost() {
   const total =
     destination.estimatedLodgingCostPerDay * duration.value +
     destination.estimatedFlightCostPerPerson * numberOfTravelers.value;
-    postMessage.classList.add("hidden");
+  postMessage.classList.add("hidden");
   totalCostSection.classList.remove("hidden");
   totalCostSection.innerText = `$${total} for this new trip`;
   totalForNewTrip += total;
@@ -198,8 +193,8 @@ function createPost() {
       };
       postTrip(tripObject);
       displayTotalSpent();
-    }
-  }
+    };
+  };
 };
 
 function postTrip(data) {
