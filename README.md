@@ -16,6 +16,8 @@ Welcome to CatTravel! This is a travel tracker app for managing and tracking dif
 - Vanilla JavaScript, HTML, and CSS
 - Mocha and Chai
 - Fetch API
+- Webpack
+- Dayjs
 
 ## Preview
 
