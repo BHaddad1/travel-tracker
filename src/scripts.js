@@ -112,7 +112,7 @@ function logInTraveler() {
   const traveler = username.value.substr(0, 8);
   const longerId = username.value.substr(8, 2);
   const evenLongerId = username.value.substr(8, 3);
-  if (traveler === "traveler" && Number(longerId) < 51 && Number(evenLongerId) < 51 && password.value === "travel") {
+  if (traveler === "traveler" && Number(longerId) <= 50 && Number(evenLongerId) <= 50 && password.value === "travel") {
     currentTraveler = travelerRepository.findTravelerById(Number(longerId));
     currentTravelerId = currentTraveler.id;
     allTripsForTraveler = tripRepository.filterByTravelerID(currentTravelerId);
@@ -179,8 +179,8 @@ function createDropdown() {
 function displayTripCost() {
   const destination = tripRepository.findDestinationByName(dropdown.value);
   const total =
-    destination.estimatedLodgingCostPerDay * duration.value +
-    destination.estimatedFlightCostPerPerson * numberOfTravelers.value;
+    (destination.estimatedLodgingCostPerDay * duration.value) +
+    (destination.estimatedFlightCostPerPerson * numberOfTravelers.value) * 1.1;
   const formattedTotal = total.toLocaleString("en-US");
   postMessage.classList.add("hidden");
   totalCostSection.classList.remove("hidden");
