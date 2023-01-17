@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="./images/catTravel2.jpg">
     <title>Catravel</title>
   </head>
   <body>
@@ -46,6 +47,7 @@
           </section>
         </section>
         <form class="trip-search-form" role="search">
+          <p class="trip-requested-message hidden" id="trip-requested-message"></p>
           <label for="destinations" class="hidden">Destinations</label>
           <select class="form destination" type="text" name="destinations" role="menu" id="destinations" autofocus required>
             <option class="form destinations" name="destinations">Select a Destination</option>
@@ -57,7 +59,6 @@
           <label class="duration hidden" for="duration-input" id="duration">Duration</label>
           <input for="duration" class="form duration-input" id="duration-input" type="number" required min="1" minlength="1" aria-label="Duration" placeholder="Duration of Stay">
           <h3 class="new-trip-total hidden" id="total-trip-cost">Total for Requested Trip</h3>
-          <p class="trip-requested-message hidden" id="trip-requested-message"></p>
         </form>
         <section class="error-handling hidden" id="error-message">
           <h2 class="hidden">Error</h2>
