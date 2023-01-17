@@ -181,10 +181,13 @@ function displayTripCost() {
   const total =
     (destination.estimatedLodgingCostPerDay * duration.value) +
     (destination.estimatedFlightCostPerPerson * numberOfTravelers.value) * 1.1;
-  const formattedTotal = total.toLocaleString("en-US");
+  const fixedTotal = total.toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
   postMessage.classList.add("hidden");
   totalCostSection.classList.remove("hidden");
-  totalCostSection.innerText = `$${formattedTotal} for this new trip`;
+  totalCostSection.innerText = `$${fixedTotal} for this new trip`;
   totalForNewTrip += total;
 };
 
@@ -200,7 +203,7 @@ function createPost() {
         id: allTrips.length + 1,
         userID: currentTravelerId,
         destinationID: Number(destinationId.id),
-        travelers: numberOfTravelers.value,
+        travelers: Number(numberOfTravelers.value),
         date: dayjs(dateInput.value).format("YYYY/MM/DD"),
         duration: Number(duration.value),
         status: "pending",
@@ -231,10 +234,7 @@ function postTrip(data) {
       postMessage.classList.remove("hidden");
       postMessage.innerText =
         "Success! Your trip has been requested and is pending. You'll hear back from an agent shortly!";
-      dropdown.value = "";
-      duration.value = "";
-      numberOfTravelers.value = "";
-      dateInput.value = "";
+      clearSearchInputs()
       setTimeout(() => {
         postMessage.innerText = "Please fill out ALL inputs before requesting a trip."
       }, 3000);
@@ -245,17 +245,18 @@ function postTrip(data) {
           pastTripsData = tripRepository.findPastTrips(currentTravelerId);
           upcomingTripsData = tripRepository.findUpcomingTrips(currentTravelerId);
           pendingTripsData = tripRepository.filterTripsByStatus("pending", currentTravelerId);
-          tripsContainer.innerHTML = "";
           displayTrips(allTripsForTraveler);
         })
         .catch((err) => {
           errorMessage.classList.remove("hidden");
           errorMessage.innerText = "This is embarrasing. We've run into an error. Please try again later.";
+          clearSearchInputs()
         });
     })
     .catch((err) => {
       postMessage.classList.remove("hidden");
       postMessage.innerText = "This is embarrasing. We've run into an error. Please try again later.";
+      clearSearchInputs()
     });
 };
 
@@ -268,4 +269,12 @@ function preventDuplicates(data, userID, date) {
 function logoutTraveler() {
   loginSection.classList.remove("hidden");
   travelerPage.classList.add("hidden");
+};
+
+function clearSearchInputs() {
+  dropdown.value = "";
+  duration.value = "";
+  numberOfTravelers.value = "";
+  dateInput.value = "";
+  totalCostSection.innerText = "";
 };
