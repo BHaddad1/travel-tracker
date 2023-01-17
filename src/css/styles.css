@@ -26,9 +26,9 @@ body {
   font-size: 1.2em;
 }
 
-.hidden {
+/* .hidden {
   display: none;
-}
+} */
 
 .nav-container {
   align-items: flex-start;
