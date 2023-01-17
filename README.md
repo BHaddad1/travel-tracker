@@ -29,4 +29,5 @@ Some wins included debugging quickly, and deleting unused classes when it became
 
 ## Contact
 Blanche Haddad (they/them)
+
 [LinkedIn](https://www.linkedin.com/in/blanche-haddad-denver/)
